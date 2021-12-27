@@ -1,3 +1,9 @@
+system76-driver (20.04.47~~alpha) focal; urgency=low
+
+  * Daily WIP for 20.04.47
+
+ -- Tim Crawford <tcrawford@system76.com>  Mon, 27 Dec 2021 15:02:46 -0700
+
 system76-driver (20.04.46) focal; urgency=low
 
   * Fix line-in on major-r2.1 with rev1.2 motherboards
