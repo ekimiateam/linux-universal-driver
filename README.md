@@ -1,7 +1,9 @@
-# System76 Driver
+# Linux Driver
 
-This program installs drivers and provides restore functionality for System76
+This program installs drivers and provides restore functionality for linux powered
 machines.
+
+This software is based on system76-driver project
 
 Open Activities button on the top left or use the Ubuntu/Pop!\_OS/Super key and
 search for 'system76' then click the icon and enter your password to open the
