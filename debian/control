@@ -1,7 +1,7 @@
 Source: system76-driver
 Section: utils
 Priority: extra
-Maintainer: System76, Inc. <dev@system76.com>
+Maintainer: Ekimia, Inc. <mm@ekimia.fr>
 Build-Depends: debhelper (>= 9.20160709),
     dh-python,
     gir1.2-gtk-3.0,
@@ -16,9 +16,9 @@ Build-Depends: debhelper (>= 9.20160709),
     xbacklight
 Standards-Version: 4.5.0
 X-Python3-Version: >= 3.6
-Homepage: https://launchpad.net/system76-driver
+Homepage: https://github.com/ekimiateam/linux-universal-driver
 
-Package: system76-driver
+Package: linux-universal-driver
 Architecture: all
 Suggests: gnome-color-manager
 Depends: ${python3:Depends}, ${misc:Depends},
@@ -45,10 +45,10 @@ Depends: ${python3:Depends}, ${misc:Depends},
 Recommends: hidpi-daemon,
             lm-sensors,
             system76-wallpapers
-Description: Universal driver for System76 computers
- System76 Driver provides drivers, restore, and regression support for System76
+Description: Linux Universal driver for computers
+ Linux Universal Driver provides drivers, restore, and regression support for
  computers running Ubuntu.  Click the Device Menu (power icon at the top right
- of your screen) and choose System Settings.  Click System76 Driver to install
+ of your screen) and choose System Settings.  Click Linux Universal Driver to install
  drivers or restore your computer.
 
 Package: system76-driver-nvidia
