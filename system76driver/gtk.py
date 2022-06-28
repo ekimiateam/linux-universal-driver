@@ -83,7 +83,7 @@ class UI:
         else:
             name = _('Non System76 Product')
             self.set_notify('gtk-dialog-error',
-                _('Not a System76 product, nothing to do!')
+                _('Your system has not been recognize , please open a github issue at https://bit.ly/3u8hpeF')
             )
         self.builder.get_object('sysName').set_text(name)
 
