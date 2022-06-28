@@ -81,7 +81,7 @@ class UI:
         if product:
             name = product['name']
         else:
-            name = _('Non System76 Product')
+            name = _('Undefined Product')
             self.set_notify('gtk-dialog-error',
                 _('Your system has not been recognized, please open a github issue at https://bit.ly/3u8hpeF')
             )

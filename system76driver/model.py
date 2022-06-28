@@ -317,7 +317,8 @@ def determine_model(info=None):
         table = TABLES[keyword]
         if value in table:
             return table[value]
-    return 'nonsystem76'
+    bpname = info['baseboard-product-name']
+    return bpname
 
 
 def determine_model_new(sysdir='/sys', info=None):
