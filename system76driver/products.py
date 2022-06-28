@@ -162,6 +162,10 @@ PRODUCTS = {
         'name': 'Darter Pro',
         'drivers': [],
     },
+    'darp8': {
+        'name': 'Darter Pro',
+        'drivers': [],
+    },
 
     # Galago:
     'galu1': {
@@ -326,6 +330,18 @@ PRODUCTS = {
             actions.blacklist_nvidia_i2c,
         ],
     },
+    'gaze17-3050': {
+        'name': 'Gazelle',
+        'drivers': [
+            actions.blacklist_nvidia_i2c,
+        ],
+    },
+    'gaze17-3060-b': {
+        'name': 'Gazelle',
+        'drivers': [
+            actions.blacklist_nvidia_i2c,
+        ],
+    },
     'gazu1': {
         'name': 'Gazelle Ultra',
         'drivers': [
@@ -401,13 +417,17 @@ PRODUCTS = {
         'name': 'Kudu',
         'drivers': [
             actions.internal_mic_gain,
-	],
+        ],
     },
     'kudu5': {
         'name': 'Kudu',
         'drivers': [
             actions.internal_mic_gain,
-	],
+        ],
+    },
+    'kudu6': {
+        'name': 'Kudu',
+        'drivers': [],
     },
 
     # Lemur:
@@ -464,6 +484,10 @@ PRODUCTS = {
         ],
     },
     'lemp10': {
+        'name': 'Lemur Pro',
+        'drivers': [],
+    },
+    'lemp11': {
         'name': 'Lemur Pro',
         'drivers': [],
     },
@@ -656,6 +680,13 @@ PRODUCTS = {
         ],
     },
     'oryp8': {
+        'name': 'Oryx Pro',
+        'drivers': [
+            actions.blacklist_nvidia_i2c,
+            actions.i915_initramfs,
+        ],
+    },
+    'oryp9': {
         'name': 'Oryx Pro',
         'drivers': [
             actions.blacklist_nvidia_i2c,
@@ -954,6 +985,10 @@ PRODUCTS = {
         'name': 'Thelio',
         'drivers': [],
     },
+    'thelio-b3': {
+        'name': 'Thelio',
+        'drivers': [],
+    },
     'thelio-r1': {
         'name': 'Thelio',
         'drivers': [],
@@ -1030,7 +1065,19 @@ PRODUCTS = {
             actions.integrated_11th_gen_intel_fix,
         ],
     },
+    'thelio-mira-b2': {
+        'name': 'Thelio Mira',
+        'drivers': [],
+    },
+    'thelio-mira-b3': {
+        'name': 'Thelio Mira',
+        'drivers': [],
+    },
     'thelio-mira-r1': {
+        'name': 'Thelio Mira',
+        'drivers': [],
+    },
+    'thelio-mira-r2': {
         'name': 'Thelio Mira',
         'drivers': [],
     },
