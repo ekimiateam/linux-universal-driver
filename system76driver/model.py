@@ -110,6 +110,7 @@ TABLES = {
         'M740T/M760T': 'panp4i',
         'M740TU/M760TU': 'panp4n',
         'M860TU': 'serp5',
+        'NS50_70MU' : 'jaguar2',
     },
     'system-version': {
         'addw1': 'addw1',

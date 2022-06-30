@@ -1145,4 +1145,8 @@ PRODUCTS = {
         'name': 'Wild Dog Pro',
         'drivers': [],
     },
+    'jaguar2': {
+        'name': 'Jaguar 2',
+        'drivers': [],
+    }
 }
