@@ -1,0 +1,222 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: System 76 Driver French\n"
+"POT-Creation-Date: 2022-06-30 13:49+0200\n"
+"PO-Revision-Date: 2022-06-30 13:57+0200\n"
+"Last-Translator: \n"
+"Language-Team: Fouzi Ekimia\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.1\n"
+"X-Poedit-Basepath: ../system76driver\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: actions.py:260
+msgid "Running `kernelstub`"
+msgstr ""
+
+#: actions.py:263
+msgid "Running `update-grub`"
+msgstr ""
+
+#: actions.py:267
+msgid "Running `update-initramfs`"
+msgstr ""
+
+#: actions.py:456
+msgid "Improve WiFi performance on Battery"
+msgstr ""
+
+#: actions.py:465
+msgid "Fix HDMI hot-plugging when on battery"
+msgstr ""
+
+#: actions.py:473
+msgid "Fix suspend issues with pm_async"
+msgstr ""
+
+#: actions.py:480 actions.py:491 actions.py:513
+msgid "Enable brightness hot keys"
+msgstr ""
+
+#: actions.py:502
+msgid "Remove brightness hot-key fix"
+msgstr ""
+
+#: actions.py:524
+msgid "Enable Radeon GPU power management"
+msgstr ""
+
+#: actions.py:538
+msgid "Fix HDMI audio playback speed"
+msgstr ""
+
+#: actions.py:549
+msgid "Enable Intel i915 Alpha Driver Support"
+msgstr ""
+
+#: actions.py:568
+msgid "Correctly diplay Ubuntu logo on boot"
+msgstr ""
+
+#: actions.py:595
+msgid "Fix keyboard after suspend/resume"
+msgstr ""
+
+#: actions.py:608
+msgid "Enable Touchpad"
+msgstr ""
+
+#: actions.py:620
+msgid "Change WD Blue drive pstate latency, fixing crashes on pang10"
+msgstr ""
+
+#: actions.py:633
+msgid "Force i915 driver to load on 11th gen Intel integrated graphics"
+msgstr ""
+
+#: actions.py:648
+msgid "Improve graphics UX for UEFI resume"
+msgstr ""
+
+#: actions.py:671
+msgid "Remove GRUB_GFXPAYLOAD_LINUX=text line"
+msgstr ""
+
+#: actions.py:694
+msgid "Webcam quirk fixes"
+msgstr ""
+
+#: actions.py:711
+msgid "Fix Internal Mic Gain"
+msgstr ""
+
+#: actions.py:728
+msgid "Fix Headphone/SPDIF description in Pulseaudio"
+msgstr ""
+
+#: actions.py:790
+msgid "Enable high-quality audio DAC"
+msgstr ""
+
+#: actions.py:838 actions.py:884 actions.py:891
+msgid "Enable headset microphone"
+msgstr ""
+
+#: actions.py:939
+msgid "Switch left/right speaker channels."
+msgstr ""
+
+#: actions.py:961
+msgid "Remove configuration to switch left/right speaker channels."
+msgstr ""
+
+#: actions.py:1019
+msgid "Apply ENERGY STAR default gsettings overrides"
+msgstr ""
+
+#: actions.py:1077
+msgid "Disable Wake-On-LAN on battery power for ENERGY STAR"
+msgstr ""
+
+#: actions.py:1225
+msgid "Control TDP on battery to maintain stability and optimize performance."
+msgstr ""
+
+#: actions.py:1339
+msgid "Set default HiDPI scaling factor."
+msgstr ""
+
+#: actions.py:1349
+msgid "Fixes for probing Intel HDA device"
+msgstr ""
+
+#: actions.py:1359
+msgid "Disable buggy Intel HDA power saving"
+msgstr ""
+
+#: actions.py:1366
+msgid "Workaround for delay when loading NVIDIA i2c kernel module"
+msgstr ""
+
+#: actions.py:1376
+msgid "Fixes for probing USB audio device"
+msgstr ""
+
+#: actions.py:1389
+msgid "Load USB audio microphone device"
+msgstr ""
+
+#: actions.py:1419
+msgid "Load USB audio S/PDIF device"
+msgstr ""
+
+#: actions.py:1439
+msgid "Set Firefox framerate to 144fps (for 144Hz display)"
+msgstr ""
+
+#: actions.py:1445
+msgid "Remove unnecessary WebRender override for Firefox"
+msgstr ""
+
+#: actions.py:1461
+msgid "Enable ForceFullCompositionPipeline in the NVIDIA driver"
+msgstr ""
+
+#: actions.py:1520
+msgid "Remove NVIDIA dynamic power override"
+msgstr ""
+
+#: actions.py:1528
+msgid "Add i915 driver to initramfs"
+msgstr ""
+
+#: actions.py:1532
+msgid "Force enable audio output from DP-1 (physical HDMI 1 port.)"
+msgstr ""
+
+#: actions.py:1560
+msgid "Fix pins for meer5 HDMI/DP audio output."
+msgstr ""
+
+#: actions.py:1587
+msgid "Fix for freezes on some CML-U processors"
+msgstr ""
+
+#: gtk.py:85
+msgid "Undefined Product"
+msgstr "Produit non défini"
+
+#: gtk.py:87
+msgid ""
+"Your system has not been recognized, please open a github issue at https://"
+"bit.ly/3u8hpeF"
+msgstr ""
+"Votre système n'a pas été reconnu, veuillez ouvrir un problème github à "
+"https://bit.ly/3u8hpeF"
+
+#: gtk.py:95
+msgid "All of the drivers for this system are provided by Ubuntu."
+msgstr "Tous les pilotes pour ce système sont fournis par Ubuntu."
+
+#: gtk.py:108
+msgid "All drivers have been applied, nothing to do."
+msgstr "Tous les pilotes ont été appliqués, rien à faire."
+
+#: gtk.py:145
+msgid "Now installing drivers. This may take a while..."
+msgstr ""
+
+#: gtk.py:171
+msgid ""
+"A log file (system76-logs.tgz) was created in your home folder.\n"
+"Please send it to support via www.system76.com/support"
+msgstr ""
+
+#: gtk.py:177
+msgid "Creating logs..."
+msgstr ""
