@@ -1145,4 +1145,10 @@ PRODUCTS = {
         'name': 'Wild Dog Pro',
         'drivers': [],
     },
+    'pulsar3': {
+        'name': 'Pulsar 3',
+        'drivers': [
+            actions.i8042_nomux,
+        ],
+    }
 }
