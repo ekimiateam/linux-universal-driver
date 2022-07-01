@@ -110,6 +110,7 @@ TABLES = {
         'M740T/M760T': 'panp4i',
         'M740TU/M760TU': 'panp4n',
         'M860TU': 'serp5',
+        'NLx0MU': 'pulsar3'
     },
     'system-version': {
         'addw1': 'addw1',
@@ -317,7 +318,8 @@ def determine_model(info=None):
         table = TABLES[keyword]
         if value in table:
             return table[value]
-    return 'nonsystem76'
+    bpname = info['baseboard-product-name']
+    return bpname
 
 
 def determine_model_new(sysdir='/sys', info=None):

@@ -1,14 +1,14 @@
 [Desktop Entry]
 Version=1.1
 Encoding=UTF-8
-Name=System76 Driver
-GenericName=System76 Driver
-Comment=Installs Drivers for System76 Systems
+Name=Linux Universal Driver
+GenericName=Linux Universal Driver
+Comment=Installs Drivers for Systems
 Exec=system76-driver-pkexec
 Terminal=false
 Type=Application
-Icon=system76-driver
+Icon=tux
 Categories=GNOME;GTK;Settings;X-GNOME-SystemSettings;X-GNOME-Settings-Panel;X-Unity-Settings-Panel;
-GenericName[en_US]=System76 Driver
-X-Unity-Settings-Panel=system76-driver
-X-GNOME-Settings-Panel=system76-driver
+GenericName[en_US]=Linux Universal Driver
+X-Unity-Settings-Panel=linuxuniversal-driver
+X-GNOME-Settings-Panel=linuxuniversal-driver
