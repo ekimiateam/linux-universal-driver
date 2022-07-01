@@ -110,7 +110,9 @@ TABLES = {
         'M740T/M760T': 'panp4i',
         'M740TU/M760TU': 'panp4n',
         'M860TU': 'serp5',
-        'NLx0MU': 'pulsar3'
+        'NLx0MU': 'pulsar3',
+        'NL40_50CU': 'pulsar1',
+        'NL40_50CU': 'polar1',
     },
     'system-version': {
         'addw1': 'addw1',

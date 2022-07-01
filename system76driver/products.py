@@ -1150,5 +1150,13 @@ PRODUCTS = {
         'drivers': [
             actions.i8042_nomux,
         ],
+    },
+    'pulsar1': {
+        'name': 'Pulsar ',
+        'drivers': [
+            actions.i8042_nomux,
+        ],
     }
+    
+    
 }
