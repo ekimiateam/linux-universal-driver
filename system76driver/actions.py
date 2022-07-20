@@ -1585,3 +1585,17 @@ class intel_idle_max_cstate_4(GrubAction):
 
     def describe(self):
         return _('Fix for freezes on some CML-U processors')
+
+
+
+class disable_psr(GrubAction):
+    """
+    Add i915.enable_psr=0 to GRUB_CMDLINE_LINUX_DEFAULT
+
+    This Disable PSR to remove flickering on Tongfang PH4TRX1
+    """
+
+    add = ('i915.enable_psr=0',)
+
+    def describe(self):
+        return _('Disable PSR to remove flickering')

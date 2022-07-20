@@ -83,6 +83,7 @@ TABLES = {
         'K8N-DL': 'wilp2',
         'KFN5-D SLI': 'wilp3',
         'DP35DP': 'wilp5',
+        'PH4TRX1': 'fox1',
     },
     'system-product-name': {
         'MS-1012': 'gazv1',
@@ -112,7 +113,7 @@ TABLES = {
         'M860TU': 'serp5',
         'NLx0MU': 'pulsar3',
         'NL40_50CU': 'pulsar1',
-        'NL40_50CU': 'polar1',
+        'NL40_50CU': 'polar1', # to be fixed ..
     },
     'system-version': {
         'addw1': 'addw1',
@@ -288,6 +289,7 @@ TABLES = {
         'sabt1': 'sabt1',
         'sabt2': 'sabt2',
         'sabt3': 'sabt3',
+        'fox1' : 'fox1',
     },
 }
 
@@ -311,7 +313,7 @@ def get_all_dmi_info():
 
 def determine_model(info=None):
     """
-    Determine the System76 model number.
+    Determine the machine model number.
     """
     if info is None:
         info = get_dmi_info()
