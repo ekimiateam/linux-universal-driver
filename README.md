@@ -5,9 +5,13 @@ machines.
 
 This software is based on system76-driver project ( Thanks to them ! )
 
-Open Activities button on the top left or use the Ubuntu/Pop!\_OS/Super key and
-search for 'LUD' then click the icon and enter your password to open the
-application.
+# Using LUD
+
+You can start quickly the GUI by double cliking ( or launch as a program ) on startlud.sh
+
+Or once installed : 
+
+Launch the 'LUD' application and enter your password to open the application.
 
 ## Making changes
 
