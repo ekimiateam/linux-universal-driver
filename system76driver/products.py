@@ -1156,11 +1156,11 @@ PRODUCTS = {
         'drivers': [
             actions.i8042_nomux,
         ],
+        
     },
-    'fox1': {
-        'name': 'Fox 1 ',
+    'guerilla1': {
+        'name': 'Guerilla 1',
         'drivers': [
-            actions.disable_psr,
         ],
     }
 

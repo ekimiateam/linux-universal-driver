@@ -84,6 +84,7 @@ TABLES = {
         'KFN5-D SLI': 'wilp3',
         'DP35DP': 'wilp5',
         'PH4TRX1': 'fox1',
+        'NP5x_NP7xHH_HJ_HK': 'guerilla1'
     },
     'system-product-name': {
         'MS-1012': 'gazv1',
