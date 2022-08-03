@@ -1,3 +1,10 @@
+system76-driver (20.04.60) focal; urgency=low
+
+  * Add galp6
+  * Fix Bluetooth suspend workaround
+
+ -- leviport <levi@system76.com>  Tue, 02 Aug 2022 08:51:08 -0600
+
 system76-driver (20.04.59) focal; urgency=low
 
   * Add lemp11 and oryp9
