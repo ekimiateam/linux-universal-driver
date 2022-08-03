@@ -1599,3 +1599,14 @@ class disable_psr(GrubAction):
 
     def describe(self):
         return _('Disable PSR to remove flickering')
+
+
+class rgb_keyboard_driver(FileAction):
+
+    #os.system('apt update')
+    #relpath = ('system76driver', 'data')
+    
+    def describe(self):
+        return _('Enable RGB Keyboard driver')
+
+
