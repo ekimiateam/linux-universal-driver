@@ -1594,18 +1594,24 @@ class disable_psr(GrubAction):
 
     This Disable PSR to remove flickering on Tongfang PH4TRX1
     """
-
     add = ('i915.enable_psr=0',)
 
     def describe(self):
         return _('Disable PSR to remove flickering')
 
 
-class rgb_keyboard_driver(FileAction):
+class rgb_keyboard_driver(Action):
+       
 
-    #os.system('apt update')
-    #relpath = ('system76driver', 'data')
-    
+    def perform(self):
+        command = 'apt install'+" ./system76driver/data/tuxedo-keyboard_latest_all.deb"
+        os.system(command)
+
+    def isneeded(self):
+        return True
+    def get_isneeded(self):
+        return True
+
     def describe(self):
         return _('Enable RGB Keyboard driver')
 

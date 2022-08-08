@@ -1172,6 +1172,7 @@ PRODUCTS = {
      'leopard2': {
         'name': 'Leopard 2',
         'drivers': [
+            actions.rgb_keyboard_driver,
         ],
     }
 
