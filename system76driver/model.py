@@ -84,7 +84,8 @@ TABLES = {
         'KFN5-D SLI': 'wilp3',
         'DP35DP': 'wilp5',
         'PH4TRX1': 'fox1',
-        'NP5x_NP7xHH_HJ_HK': 'guerilla1'
+        'NP5x_NP7xHH_HJ_HK': 'guerilla1',
+        'NS5x_NS7xPU': 'leopard2',
     },
     'system-product-name': {
         'MS-1012': 'gazv1',
@@ -112,6 +113,7 @@ TABLES = {
         'M740T/M760T': 'panp4i',
         'M740TU/M760TU': 'panp4n',
         'M860TU': 'serp5',
+        'fox1' : 'fox1',
         'NLx0MU': 'pulsar3',
         'NL40_50CU': 'pulsar1',
         'NL40_50CU': 'polar1', # to be fixed ..
@@ -291,7 +293,6 @@ TABLES = {
         'sabt1': 'sabt1',
         'sabt2': 'sabt2',
         'sabt3': 'sabt3',
-        'fox1' : 'fox1',
     },
 }
 

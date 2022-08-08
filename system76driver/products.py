@@ -1166,6 +1166,13 @@ PRODUCTS = {
         'name': 'Guerilla 1',
         'drivers': [
         ],
+    },
+
+
+     'leopard2': {
+        'name': 'Leopard 2',
+        'drivers': [
+        ],
     }
 
     
