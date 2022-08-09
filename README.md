@@ -5,6 +5,13 @@ machines.
 
 This software is based on system76-driver project ( Thanks to them ! )
 
+#Supported machines 
+
+| OEM      | Manufacturer     | Board Name | Product Name |
+|----------|------------------|------------|--------------| 
+| Clevo    | Ekimia           |   NS50_70MU |  Jaguar1    | 
+| Tongfang | Ekimia           |   PH4TRX1   |  fox1       |
+
 # Using LUD
 
 You can start quickly the GUI by double cliking ( or launch as a program ) on startlud.sh
