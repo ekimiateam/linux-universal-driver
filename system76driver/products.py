@@ -1174,6 +1174,13 @@ PRODUCTS = {
         'drivers': [
             actions.rgb_keyboard_driver,
         ],
+    },
+
+      'jaguar1': {
+        'name': 'Jaguar 1',
+        'drivers': [
+            actions.rgb_keyboard_driver,
+        ],
     }
 
     

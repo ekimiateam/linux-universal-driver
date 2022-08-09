@@ -6,3 +6,7 @@
 /debian/*debhelper*
 /debian/*.substvars
 __pycache__
+debian/linux-universal-driver/
+debian/linux-universal-driver/
+debian/linux-universal-driver/
+debian/linux-universal-driver/
