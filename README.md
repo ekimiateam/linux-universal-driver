@@ -9,8 +9,17 @@ This software is based on system76-driver project ( Thanks to them ! )
 
 | OEM      | Manufacturer     | Board Name | Product Name |
 |----------|------------------|------------|--------------| 
-| Clevo    | Ekimia           |   NS50_70MU |  Jaguar1    | 
+| Clevo    | Ekimia           |   NS50_70MU |  Jaguar1 or leopard1   | 
 | Tongfang | Ekimia           |   PH4TRX1   |  fox1       |
+| Clevo | Ekimia           |   NS5x_NS7xPU   |  jaguar2 or leopard2       |
+| Clevo | Ekimia           |   NP5x_NP7xHH_HJ_HK   |  guerilla1       |
+| Clevo | Ekimia           |   NL40_50CU   |  pulsar1 or polar1       |
+| Clevo | Ekimia           |   NLx0MU   |  pulsar3       |
+| Clevo | System76           |   Any   |  Any      |
+
+
+
+
 
 # Using LUD
 
