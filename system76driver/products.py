@@ -1162,7 +1162,7 @@ PRODUCTS = {
         ],
         
     },
-    'guerilla1': {
+    'guerilla1': {   #missing touchpad fix when exiting from sleep , rmmod psmouse
         'name': 'Guerilla 1',
         'drivers': [
         ],
@@ -1173,6 +1173,7 @@ PRODUCTS = {
         'name': 'Leopard 2',
         'drivers': [
             actions.rgb_keyboard_driver,
+            actions.i8042_nomux,
         ],
     },
 
@@ -1180,6 +1181,7 @@ PRODUCTS = {
         'name': 'Jaguar 1',
         'drivers': [
             actions.rgb_keyboard_driver,
+            actions.i8042_nomux,
         ],
     }
 
