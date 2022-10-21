@@ -89,10 +89,10 @@ TABLES = {
         'NS50_70MU': 'jaguar1',
         'NLx0MU': 'pulsar3',
         'NL40_50CU': 'pulsar1',
-        'NL40_50CU': 'polar1' # to be fixed ..
-        'L141CU': 'neutron1'
-        'L141MU': 'neutron2'
-        'L140PU': 'neutron3'
+        'NL40_50CU': 'polar1', # to be fixed ..
+        'L141CU': 'neutron1',
+        'L141MU': 'neutron2',
+        'L140PU': 'neutron3',
     },
     'system-product-name': {
         'MS-1012': 'gazv1',
@@ -121,7 +121,7 @@ TABLES = {
         'M740TU/M760TU': 'panp4n',
         'M860TU': 'serp5',
         'fox1' : 'fox1',
-        'jaguar1': 'jaguar1'
+        'jaguar1': 'jaguar1',
     },
     'system-version': {
         'addw1': 'addw1',
