@@ -1149,22 +1149,51 @@ PRODUCTS = {
         'name': 'Wild Dog Pro',
         'drivers': [],
     },
-    'pulsar3': {
-        'name': 'Pulsar 3',
-        'drivers': [
-            actions.i8042_nomux,
-        ],
-    },
+   
     'pulsar1': {
-        'name': 'Pulsar ',
+        'name': 'Pulsar 1',
         'drivers': [
             actions.i8042_nomux,
         ],
         
     },
+
+    'pulsar2': {
+        'name': 'Pulsar 2',
+        'drivers': [
+            actions.i8042_nomux,
+        ],
+        
+    },
+
+     'pulsar3': {
+        'name': 'Pulsar 3',
+        'drivers': [
+            actions.i8042_nomux,
+        ],
+    },
+
     'guerilla1': {   #missing touchpad fix when exiting from sleep , rmmod psmouse
         'name': 'Guerilla 1',
         'drivers': [
+        ],
+    },
+
+    
+    'fox1': {
+        'name': 'Fox 1 ',
+        'drivers': [
+            actions.disable_psr,
+        ],
+    },
+
+    
+
+      'leopard1': {
+        'name': 'Leopard 1',
+        'drivers': [
+            actions.rgb_keyboard_driver,
+            actions.i8042_nomux,
         ],
     },
 
@@ -1184,6 +1213,48 @@ PRODUCTS = {
             actions.i8042_nomux,
         ],
     }
+
+    ,
+
+      'jaguar2': {
+        'name': 'Jaguar 2',
+        'drivers': [
+            actions.rgb_keyboard_driver,
+            actions.i8042_nomux,
+        ],
+    }
+
+ ,
+
+      'neutron1': {
+        'name': 'Neutron 1',
+        'drivers': [
+            actions.i8042_nomux,
+            actions.set_deep_mem_sleep,
+        ],
+    }
+   
+   
+    ,
+
+      'neutron2': {
+        'name': 'Neutron 2',
+        'drivers': [
+            actions.i8042_nomux,
+            actions.set_deep_mem_sleep,
+        ],
+    }
+
+     ,
+
+      'neutron3': {
+        'name': 'Neutron 3',
+        'drivers': [
+            actions.i8042_nomux,
+            actions.set_deep_mem_sleep,
+        ],
+    }
+
 
     
     

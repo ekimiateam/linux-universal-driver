@@ -1616,3 +1616,16 @@ class rgb_keyboard_driver(Action):
         return _('Enable RGB Keyboard driver')
 
 
+class set_deep_mem_sleep(GrubAction):
+    """
+    Add mem_sleep_default=deep to GRUB_CMDLINE_LINUX_DEFAULT
+
+    This set sleep mode to deep ( S3 ) instead of S3 leading to days of sleep instead of hours
+    """
+    add = ('mem_sleep_default=deep',)
+
+    def describe(self):
+        return _('set sleep mode to deep: S3 ')
+
+
+
