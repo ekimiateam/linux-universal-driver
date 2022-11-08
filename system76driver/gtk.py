@@ -75,9 +75,9 @@ class UI:
         self.enabled = {
             'driverInstall': False,
             'driverRestore': False,
-            'driverCreate': False,
+            'driverCreate': True,
         }
-        self.set_sensitive(False)
+        self.set_sensitive(True)
 
         if product:
             name = product['name']
