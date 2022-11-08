@@ -11,13 +11,13 @@
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
-    <property name="program_name">System76 Driver</property>
+    <property name="program_name">Linux Universal driver</property>
     <property name="version">{driver version - you should not see this}</property>
     <property name="copyright" translatable="yes">Copyright (c) 2006-2019 System76, Inc.</property>
-    <property name="comments" translatable="yes">A simple utility for drivers on System76 computers.</property>
-    <property name="website">http://www.system76.com/</property>
-    <property name="website_label" translatable="yes">www.system76.com</property>
-    <property name="authors">System76, Inc.
+    <property name="comments" translatable="yes">A simple utility for drivers on computers.</property>
+    <property name="website">http://www.ekimia.fr/</property>
+    <property name="website_label" translatable="yes">www.ekimia.fr</property>
+    <property name="authors">System76, Ekimia
 
 Code:
 Carl Richell
@@ -720,10 +720,10 @@ log file will be available in your home folder.</property>
           <object class="GtkImage">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_left">6</property>
-            <property name="margin_right">6</property>
-            <property name="margin_top">6</property>
-            <property name="margin_bottom">6</property>
+            <property name="margin_left">1</property>
+            <property name="margin_right">1</property>
+            <property name="margin_top">1</property>
+            <property name="margin_bottom">1</property>
             <property name="pixbuf">tux.svg</property>
           </object>
         </child>
