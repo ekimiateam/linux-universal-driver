@@ -5,6 +5,8 @@ machines.
 
 This software is based on system76-driver project ( Thanks to them ! )
 
+It is only used currently on https://ekimia.fr/linuxuniversaldriver/
+
 #Supported machines 
 
 | OEM      | Manufacturer     | Board Name | Product Name |
