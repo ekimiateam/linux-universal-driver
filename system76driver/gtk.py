@@ -30,7 +30,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import GLib, Gtk
 
 from . import __version__, get_datafile
-from .util import create_logs
+from .util import *
 from .actions import ActionRunner
 
 
@@ -167,8 +167,9 @@ class UI:
         self.thread.join()
         self.thread = None
         self.set_sensitive(True)
+        send_logs(tgz)
         self.set_notify('gtk-ok',
-            _('A log file (system76-logs.tgz) was created in your home folder.\nPlease send it to support via www.system76.com/support')
+            _('A log file  : '+tgz+' was created .\n and sent to your manufacturer')
         )
 
     def onCreateClicked(self, button):

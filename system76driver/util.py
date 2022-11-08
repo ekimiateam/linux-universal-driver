@@ -49,7 +49,7 @@ def dump_path(base, name, src):
 
 def dump_logs(base):
     fp = open(path.join(base, 'systeminfo.txt'), 'x')
-    fp.write('System76 Model: {}\n'.format(determine_model()))
+    fp.write(' Model: {}\n'.format(determine_model()))
     fp.write('OS Version: {}\n'.format(distro.name(pretty=True)))
     fp.write('Kernel Version: {}\n'.format(os.uname().release))
 
@@ -82,16 +82,16 @@ def dump_logs(base):
 
 def create_tmp_logs(func=dump_logs):
     tmp = tempfile.mkdtemp(prefix='logs.')
-    base = path.join(tmp, 'system76-logs')
+    base = path.join(tmp, 'lud-logs')
     os.mkdir(base)
     if func is not None:
         func(base)
-    tgz = path.join(tmp, 'system76-logs.tgz')
+    tgz = path.join(tmp, 'lud-logs.tgz')
     cmd = [
         'tar', '-czv',
         '-f', tgz,
         '-C', tmp,
-        'system76-logs',
+        'lud-logs',
     ]
     subprocess.run(cmd)
     return (tmp, tgz)
@@ -103,3 +103,12 @@ def create_logs(homedir, func=dump_logs):
     shutil.copy(src, dst)
     shutil.rmtree(tmp)
     return dst
+
+
+def send_logs(dst):
+    print(dst)
+    Curlcmd = "curl -verbose -X PUT -u 'publicupload:' -T "+dst+" 'https://drive.ekimia.fr/public.php/webdav/lud-logs.tgz' "
+    print(Curlcmd)
+    status, output = subprocess.getstatusoutput(Curlcmd)
+    print(output)
+
