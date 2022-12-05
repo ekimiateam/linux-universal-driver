@@ -1628,4 +1628,17 @@ class set_deep_mem_sleep(GrubAction):
         return _('set sleep mode to deep: S3 ')
 
 
+class fix_flicker_stellar(GrubAction):
+    """
+    Add to GRUB_CMDLINE_LINUX_DEFAULT
+
+    This set sleep mode to deep ( S3 ) instead of S3 leading to days of sleep instead of hours
+    """
+    add = (' ',)
+
+    def describe(self):
+        return _('Fix du Flicker')
+
+
+
 

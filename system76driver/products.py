@@ -1255,7 +1255,15 @@ PRODUCTS = {
         ],
     }
 
+    ,
+    #stellar family
 
-    
-    
+      'stellarfam': {
+        'name': 'stellar family',
+        'drivers': [
+           actions.fix_flicker_stellar
+        ],
+    }
+
+
 }
