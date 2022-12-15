@@ -1632,12 +1632,12 @@ class fix_flicker_stellar(GrubAction):
     """
     Add to GRUB_CMDLINE_LINUX_DEFAULT
 
-    This set sleep mode to deep ( S3 ) instead of S3 leading to days of sleep instead of hours
+    Fix du Flicker sur stellar Fam
     """
-    add = (' ',)
+    add = ('i915.enable_dc=0, intel_idle.max_cstate=2',)
 
     def describe(self):
-        return _('Fix du Flicker')
+        return _('Fix du Flicker sur stellar Fam')
 
 
 
