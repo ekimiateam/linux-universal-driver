@@ -1634,7 +1634,7 @@ class fix_flicker_stellar(GrubAction):
 
     Fix du Flicker sur stellar Fam
     """
-    add = ('i915.enable_dc=0, intel_idle.max_cstate=2',)
+    add = ('i915.enable_dc=0 intel_idle.max_cstate=2',)
 
     def describe(self):
         return _('Fix du Flicker sur stellar Fam')
