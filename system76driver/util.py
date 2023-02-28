@@ -107,7 +107,9 @@ def create_logs(homedir, func=dump_logs):
 
 def send_logs(dst):
     print(dst)
-    Curlcmd = "curl -verbose -X PUT -u 'publicupload:' -T "+dst+" 'https://drive.ekimia.fr/public.php/webdav/lud-logs.tgz' "
+    hostname = subprocess.run('hostname', capture_output=True, shell=True, text=True).stdout.strip()
+    desturl = "https://drive.ekimia.fr/public.php/webdav/"+hostname+"-lud-logs.tgz"
+    Curlcmd = "curl -verbose -X PUT -u 'publicupload:' -T "+dst+" "+desturl
     print(Curlcmd)
     status, output = subprocess.getstatusoutput(Curlcmd)
     print(output)
