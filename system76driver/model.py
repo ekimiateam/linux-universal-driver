@@ -87,8 +87,9 @@ TABLES = {
         'NP5x_NP7xHH_HJ_HK': 'guerilla1',
         'NS5x_NS7xPU': 'leopard2',
         'NS50_70MU': 'jaguar1',
-        'NLx0MU': 'pulsar3',
         'NL40_50CU': 'pulsar1',
+        'NLx0MU': 'pulsar3',
+        'NLxxPUx': 'pulsar4',
         'NL40_50CU': 'polar1', # to be fixed ..
         'L141CU': 'neutron1',
         'L141MU': 'neutron2',

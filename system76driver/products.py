@@ -1173,6 +1173,15 @@ PRODUCTS = {
         ],
     },
 
+     'pulsar4': {
+        'name': 'Pulsar 4',
+        'drivers': [
+            actions.i8042_nomux,
+        ],
+    },
+
+
+
     'guerilla1': {   #missing touchpad fix when exiting from sleep , rmmod psmouse
         'name': 'Guerilla 1',
         'drivers': [
