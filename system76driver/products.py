@@ -1206,34 +1206,30 @@ PRODUCTS = {
         ],
     },
 
-
-     'leopard2': {
-        'name': 'Leopard 2',
+      'jaguar1': {
+        'name': 'Jaguar or leopard 1',
         'drivers': [
             actions.rgb_keyboard_driver,
             actions.i8042_nomux,
         ],
     },
 
-      'jaguar1': {
-        'name': 'Jaguar 1',
+     'jaguar2': {
+        'name': 'Jaguar or leopard 2',
         'drivers': [
             actions.rgb_keyboard_driver,
             actions.i8042_nomux,
         ],
-    }
+    },
 
-    ,
 
-      'jaguar2': {
-        'name': 'Jaguar 2',
+      'jaguar3': {
+        'name': 'Jaguar or leopard 3',
         'drivers': [
             actions.rgb_keyboard_driver,
             actions.i8042_nomux,
         ],
-    }
-
- ,
+    },
 
       'neutron1': {
         'name': 'Neutron 1',
