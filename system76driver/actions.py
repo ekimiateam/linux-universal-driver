@@ -1604,7 +1604,7 @@ class rgb_keyboard_driver(Action):
        
 
     def perform(self):
-        command = 'apt install'+" ./system76driver/data/tuxedo-keyboard_latest_all.deb"
+        command = 'apt install -y'+" ./system76driver/data/tuxedo-keyboard_latest_all.deb"
         os.system(command)
 
     def isneeded(self):
