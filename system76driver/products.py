@@ -1261,6 +1261,15 @@ PRODUCTS = {
         ],
     }
 
+      ,
+
+      'bionic1': {
+        'name': 'Bionic 1',
+        'drivers': [
+            actions.i8042_nomux,
+        ],
+    }
+
 
     
     

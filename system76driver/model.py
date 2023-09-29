@@ -95,6 +95,8 @@ TABLES = {
         'L141CU': 'neutron1',
         'L141MU': 'neutron2',
         'L140PU': 'neutron3',
+        'N150ZU': 'bionic1',
+
     },
     'system-product-name': {
         'MS-1012': 'gazv1',
