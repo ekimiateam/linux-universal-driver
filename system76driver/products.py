@@ -1267,6 +1267,8 @@ PRODUCTS = {
         'name': 'Bionic 1',
         'drivers': [
             actions.i8042_nomux,
+            actions.rgb_keyboard_driver,
+
         ],
     }
 
