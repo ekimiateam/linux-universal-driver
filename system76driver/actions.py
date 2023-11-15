@@ -1629,3 +1629,21 @@ class set_deep_mem_sleep(GrubAction):
 
 
 
+class linux_controlcenter_app(Action):
+       
+
+    def perform(self):
+        command = 'apt install -y'+" ./system76driver/data/tuxedo-control-center_latest_amd64.deb"
+        os.system(command)
+
+    def isneeded(self):
+        return True
+    def get_isneeded(self):
+        return True
+
+    def describe(self):
+        return _('Install  the linux controlcenter app for better fan curve')
+
+
+
+
