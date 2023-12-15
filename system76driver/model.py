@@ -96,6 +96,7 @@ TABLES = {
         'L141MU': 'neutron2',
         'L140PU': 'neutron3',
         'N150ZU': 'bionic1',
+        'N14xWU': 'drift3',
 
     },
     'system-product-name': {
