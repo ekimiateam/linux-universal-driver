@@ -1240,10 +1240,7 @@ PRODUCTS = {
             actions.i8042_nomux,
             actions.set_deep_mem_sleep,
         ],
-    }
-   
-   
-    ,
+    },
 
       'neutron2': {
         'name': 'Neutron 2',
@@ -1251,9 +1248,7 @@ PRODUCTS = {
             actions.i8042_nomux,
             actions.set_deep_mem_sleep,
         ],
-    }
-
-     ,
+    },
 
       'neutron3': {
         'name': 'Neutron 3',
@@ -1261,9 +1256,7 @@ PRODUCTS = {
             actions.i8042_nomux,
             actions.set_deep_mem_sleep,
         ],
-    }
-
-      ,
+    },
 
       'bionic1': {
         'name': 'Bionic 1',
@@ -1271,8 +1264,15 @@ PRODUCTS = {
             actions.i8042_nomux,
             actions.rgb_keyboard_driver,
 
-        ],
-    }
+        ],	      
+    },
+
+	'drift3': {
+        'name': 'Drift 3',
+        'drivers': [
+            actions.i8042_nomux,
+        ],	      
+    },
 
 
     
