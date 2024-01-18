@@ -1180,6 +1180,14 @@ PRODUCTS = {
         ],
     },
 
+      'polar4': {
+        'name': 'Polar 4',
+        'drivers': [
+            actions.i8042_nomux,
+            actions.rgb_keyboard_driver,
+        ],
+    },
+
 
 
     'guerilla1': {   #missing touchpad fix when exiting from sleep , rmmod psmouse
