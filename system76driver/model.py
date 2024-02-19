@@ -85,7 +85,7 @@ TABLES = {
         'DP35DP': 'wilp5',
         'PH4TRX1': 'fox1',
         'NP5x_NP7xHH_HJ_HK': 'guerilla1',
-        'NS50_70MU': 'jaguar1',
+        'NS50MU': 'jaguar1',
         'NS5x_NS7xPU': 'jaguar2',
         'NS5x_NS7xAU': 'jaguar3',
         'NL40_50CU': 'pulsar1',
