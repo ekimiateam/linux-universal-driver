@@ -1263,6 +1263,8 @@ PRODUCTS = {
         'drivers': [
             actions.i8042_nomux,
             actions.set_deep_mem_sleep,
+	    actions.rgb_keyboard_driver,
+	    actions.linux_controlcenter_app,
         ],
     },
 
