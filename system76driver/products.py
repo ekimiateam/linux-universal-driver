@@ -1158,12 +1158,19 @@ PRODUCTS = {
         
     },
 
+    'polar1': {
+        'name': 'Polar 1',
+        'drivers': [
+            actions.i8042_nomux,
+            actions.rgb_keyboard_driver,
+        ],
+    },
+
     'pulsar2': {
         'name': 'Pulsar 2',
         'drivers': [
             actions.i8042_nomux,
         ],
-        
     },
 
      'pulsar3': {
