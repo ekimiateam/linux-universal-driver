@@ -83,19 +83,35 @@ TABLES = {
         'K8N-DL': 'wilp2',
         'KFN5-D SLI': 'wilp3',
         'DP35DP': 'wilp5',
+        
         'PH4TRX1': 'fox1',
+        
         'NP5x_NP7xHH_HJ_HK': 'guerilla1',
+        
         'NS50MU': 'jaguar1',
         'NS5x_NS7xPU': 'jaguar2',
         'NS5x_NS7xAU': 'jaguar3',
-        'NL40_50CU': 'pulsar1',
-        'NLx0MU': 'pulsar3',
-        'NLxxPUx': 'pulsar4',
+
+        
+       # 'NL40_50CU': 'pulsar1',
+       # 'NL4x_NL5xLU': 'polar2',
+        #'NLx0MU': 'pulsar3',
+        #'NLxxPUx': 'pulsar4',
+
+        
         'NL40_50CU': 'polar1', # to be fixed ..
+        'NL4x_NL5xLU': 'polar2',
+        'NLx0MU': 'polar3',
+        'NLxxPUx': 'polar4',
+
+
+        
         'L141CU': 'neutron1',
         'L141MU': 'neutron2',
         'L140PU': 'neutron3',
+        
         'N150ZU': 'bionic1',
+        
         'N14xWU': 'drift3',
 
     },
