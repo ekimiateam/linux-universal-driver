@@ -198,7 +198,7 @@ PRODUCTS = {
             actions.energystar_wakeonlan,
 	    ],
     },
-    'galp3-c': {Update model.py
+    'galp3-c': {
         'name': 'Galago Pro',
         'drivers': [],
     },
