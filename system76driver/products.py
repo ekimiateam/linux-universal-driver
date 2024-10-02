@@ -198,7 +198,7 @@ PRODUCTS = {
             actions.energystar_wakeonlan,
 	    ],
     },
-    'galp3-c': {
+    'galp3-c': {Update model.py
         'name': 'Galago Pro',
         'drivers': [],
     },
@@ -379,7 +379,7 @@ PRODUCTS = {
         'drivers': [],
     },
 
-    # Kudu:
+    # Kudu:Update model.py
     'kudp1': {
         'name': 'Kudu Professional',
         'drivers': [
@@ -1166,6 +1166,31 @@ PRODUCTS = {
         ],
     },
 
+    'polar2': {
+        'name': 'Polar 1',
+        'drivers': [
+            actions.i8042_nomux,
+            actions.rgb_keyboard_driver,
+        ],
+    },
+
+
+    'polar3': {
+        'name': 'Polar 1',
+        'drivers': [
+            actions.i8042_nomux,
+            actions.rgb_keyboard_driver,
+        ],
+    },
+	
+    'polar4': {
+        'name': 'Polar 4',
+        'drivers': [
+            actions.i8042_nomux,
+            actions.rgb_keyboard_driver,
+        ],
+    },
+
     'pulsar2': {
         'name': 'Pulsar 2',
         'drivers': [
@@ -1186,16 +1211,6 @@ PRODUCTS = {
             actions.i8042_nomux,
         ],
     },
-
-      'polar4': {
-        'name': 'Polar 4',
-        'drivers': [
-            actions.i8042_nomux,
-            actions.rgb_keyboard_driver,
-        ],
-    },
-
-
 
     'guerilla1': {   #missing touchpad fix when exiting from sleep , rmmod psmouse
         'name': 'Guerilla 1',
