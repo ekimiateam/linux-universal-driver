@@ -1,3 +1,253 @@
+system76-driver (20.04.99) focal; urgency=low
+
+  * Bump nvidia-driver to 550
+
+ -- Jeremy Soller <jackpot51@gmail.com>  Wed, 23 Oct 2024 11:08:35 -0600
+
+system76-driver (20.04.98) focal; urgency=low
+
+  * Depend on virtual package for system76-power applet
+
+ -- Jeremy Soller <jackpot51@gmail.com>  Wed, 16 Oct 2024 14:28:09 -0600
+
+system76-driver (20.04.97) focal; urgency=low
+
+  * Add thelio-spark-r1
+
+ -- Jeremy Soller <jackpot51@gmail.com>  Wed, 16 Oct 2024 11:14:55 -0600
+
+system76-driver (20.04.96) focal; urgency=low
+
+  * Add thelio-astra-a1
+
+ -- Tim Crawford <tcrawford@system76.com>  Tue, 08 Oct 2024 12:16:39 -0600
+
+system76-driver (20.04.95) focal; urgency=low
+
+  * Only require some dependencies on amd64
+
+ -- Jeremy Soller <jackpot51@gmail.com>  Thu, 22 Aug 2024 07:39:01 -0600
+
+system76-driver (20.04.94) focal; urgency=low
+
+  * Rebuild for arm64
+
+ -- Jeremy Soller <jackpot51@gmail.com>  Fri, 16 Aug 2024 14:03:37 -0600
+
+system76-driver (20.04.93) focal; urgency=low
+
+  * Remove system76-atlantic-reload suspend hook
+  * Add bonw15-b
+  * Support running GUI as non-root
+
+ -- Jeremy Soller <jackpot51@gmail.com>  Fri, 19 Jul 2024 19:24:32 -0600
+
+system76-driver (20.04.92) focal; urgency=low
+
+  * Add thelio-mega-r3
+
+ -- leviport <levi@system76.com>  Mon, 01 Jul 2024 16:02:16 -0600
+
+system76-driver (20.04.91) focal; urgency=low
+
+  * Add lemp13-b
+
+ -- Jeremy Soller <jackpot51@gmail.com>  Fri, 17 May 2024 11:02:09 -0600
+
+system76-driver (20.04.90) focal; urgency=low
+
+  * Add meer8-b
+
+ -- Jeremy Soller <jackpot51@gmail.com>  Wed, 08 May 2024 13:15:04 -0600
+
+system76-driver (20.04.89) focal; urgency=low
+
+  * Add darp10
+  * Add darp10-b
+
+ -- Jeremy Soller <jackpot51@gmail.com>  Tue, 07 May 2024 12:26:24 -0600
+
+system76-driver (20.04.88) focal; urgency=low
+
+  * Add thelio-r4
+
+ -- Jeremy Soller <jackpot51@gmail.com>  Mon, 18 Mar 2024 14:19:29 -0600
+
+system76-driver (20.04.87) focal; urgency=low
+
+  * addw4: Blacklist psmouse
+  * lemp13: Blacklist psmouse
+  * oryp12: Blacklist psmouse
+
+ -- leviport <levi@system76.com>  Mon, 11 Mar 2024 11:54:57 -0600
+
+system76-driver (20.04.86) focal; urgency=low
+
+  * Add addw4
+  * Add lemp13
+  * Add oryp12
+
+ -- Jeremy Soller <jackpot51@gmail.com>  Wed, 28 Feb 2024 10:43:07 -0700
+
+system76-driver (20.04.85) focal; urgency=low
+
+  * system76-atlantic-reload: reload atlantic 10G ethernet pci bridge to avoid hangs
+
+ -- leviport <levi@system76.com>  Tue, 02 Jan 2024 09:38:04 -0700
+
+system76-driver (20.04.84) focal; urgency=low
+
+  * Add thelio-major-r5
+
+ -- leviport <levi@system76.com>  Tue, 26 Dec 2023 09:00:10 -0700
+
+system76-driver (20.04.83) focal; urgency=low
+
+  * Add pang14
+
+ -- leviport <levi@system76.com>  Tue, 28 Nov 2023 11:31:22 -0700
+
+system76-driver (20.04.82) focal; urgency=low
+
+  * Add meer8
+
+ -- leviport <levi@system76.com>  Mon, 06 Nov 2023 09:48:13 -0700
+
+system76-driver (20.04.81) focal; urgency=low
+
+  * Add thelio-spark-b1
+
+ -- leviport <levi@system76.com>  Wed, 20 Sep 2023 13:46:12 -0600
+
+system76-driver (20.04.80) focal; urgency=low
+
+  * Add pang13
+
+ -- leviport <levi@system76.com>  Wed, 06 Sep 2023 10:37:30 -0600
+
+system76-driver (20.04.79) focal; urgency=low
+
+  * Add galp7
+  * Add darp9
+  * Add lemp12
+
+ -- Jeremy Soller <jackpot51@gmail.com>  Thu, 11 May 2023 13:08:50 -0600
+
+system76-driver (20.04.78) focal; urgency=low
+
+  * Add thelio-mira-b4.1
+
+ -- leviport <levi@system76.com>  Wed, 22 Mar 2023 17:36:18 -0600
+
+system76-driver (20.04.77) focal; urgency=low
+
+  * Add addw3
+  * Add bonw15
+  * Add gaze18
+  * Add oryp11
+  * Add serw13
+
+ -- Jeremy Soller <jackpot51@gmail.com>  Tue, 21 Mar 2023 15:03:40 -0600
+
+system76-driver (20.04.76) focal; urgency=low
+
+  * Add meer7
+
+ -- leviport <levi@system76.com>  Tue, 21 Mar 2023 11:54:47 -0600
+
+system76-driver (20.04.75) focal; urgency=low
+
+  * Add thelio-major-r4
+
+ -- leviport <levi@system76.com>  Thu, 16 Feb 2023 15:17:18 -0700
+
+system76-driver (20.04.74) focal; urgency=low
+
+  * Add thelio-b5
+
+ -- leviport <levi@system76.com>  Mon, 06 Feb 2023 15:46:31 -0700
+
+system76-driver (20.04.73) focal; urgency=low
+
+  * Remove user audio daemon. Upstreamed into ALSA.
+
+ -- leviport <levi@system76.com>  Fri, 03 Feb 2023 12:31:33 -0700
+
+system76-driver (20.04.72) focal; urgency=low
+
+  * Blacklist psmouse on TGL and ADL
+
+ -- Jeremy Soller <jackpot51@gmail.com>  Fri, 20 Jan 2023 09:16:49 -0700
+
+system76-driver (20.04.71) focal; urgency=medium
+
+  * Add Pang 12
+  * Add thelio-mira-b4
+  * Add `touchpad_use_areas` action
+
+ -- leviport <levi@system76.com>  Tue, 17 Jan 2023 16:21:23 -0700
+
+system76-driver (20.04.70) focal; urgency=low
+
+  * Add thelio-r3
+
+ -- leviport <levi@system76.com>  Tue, 20 Dec 2022 11:18:20 -0700
+
+system76-driver (20.04.69) focal; urgency=low
+
+  * Use nvidia-driver-525 for NVIDIA ISO
+
+ -- leviport <levi@system76.com>  Wed, 07 Dec 2022 08:50:50 -0700
+
+system76-driver (20.04.68) focal; urgency=low
+
+  * Add thelio-major-r3
+
+ -- leviport <levi@system76.com>  Tue, 06 Dec 2022 09:08:07 -0700
+
+system76-driver (20.04.67) focal; urgency=low
+
+  * Add thelio-major-b4
+
+ -- Jeremy Soller <jackpot51@gmail.com>  Thu, 10 Nov 2022 13:50:29 -0700
+
+system76-driver (20.04.66) focal; urgency=low
+
+  * Remove nvidia-driver-510 dependency option
+
+ -- leviport <levi@system76.com>  Tue, 25 Oct 2022 08:26:25 -0600
+
+system76-driver (20.04.65) focal; urgency=low
+
+  * Add thelio-mira-r3
+
+ -- leviport <levi@system76.com>  Mon, 17 Oct 2022 11:09:07 -0600
+
+system76-driver (20.04.64) focal; urgency=low
+
+  * Add thelio-mega-r2
+
+ -- 13r0ck <bnr@tuta.io>  Wed, 07 Sep 2022 15:38:11 -0600
+
+system76-driver (20.04.63) focal; urgency=low
+
+  * Add oryp10
+  * Add thelio-b4
+
+ -- Levi Portenier <levi@system76.com>  Tue, 30 Aug 2022 12:00:34 -0600
+
+system76-driver (20.04.62) focal; urgency=low
+
+  * Remove the Display off and Suspend reset button.
+
+ -- Levi Portenier <levi@system76.com>  Thu, 25 Aug 2022 11:46:04 -0600
+
+system76-driver (20.04.61) focal; urgency=low
+
+  * Add a Display off and Suspend reset button.
+
+ -- leviport <levi@system76.com>  Thu, 18 Aug 2022 08:20:57 -0600
+
 system76-driver (20.04.60) focal; urgency=low
 
   * Add galp6

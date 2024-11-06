@@ -28,7 +28,7 @@ import tempfile
 import distro
 import subprocess
 
-from .model import determine_model
+from .model import determine_model_new
 
 def dump_command(base, name, args):
     fp = open(path.join(base, name), 'xt')

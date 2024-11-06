@@ -38,6 +38,20 @@ PRODUCTS = {
             actions.blacklist_nvidia_i2c,
         ],
     },
+    'addw3': {
+        'name': 'Adder WS',
+        'drivers': [
+            actions.blacklist_nvidia_i2c,
+            actions.blacklist_psmouse,
+        ],
+    },
+    'addw4': {
+        'name': 'Adder WS',
+        'drivers': [
+            actions.blacklist_nvidia_i2c,
+            actions.blacklist_psmouse,
+        ],
+    },
 
     # Bonobo:
     'bonp1': {
@@ -123,6 +137,14 @@ PRODUCTS = {
         'name': 'Bonobo WS',
         'drivers': [],
     },
+    'bonw15': {
+        'name': 'Bonobo WS',
+        'drivers': [],
+    },
+    'bonw15-b': {
+        'name': 'Bonobo WS',
+        'drivers': [],
+    },
 
     # Darter:
     'daru1': {
@@ -160,11 +182,33 @@ PRODUCTS = {
     },
     'darp7': {
         'name': 'Darter Pro',
-        'drivers': [],
+        'drivers': [
+            actions.blacklist_psmouse,
+        ],
     },
     'darp8': {
         'name': 'Darter Pro',
-        'drivers': [],
+        'drivers': [
+            actions.blacklist_psmouse,
+        ],
+    },
+    'darp9': {
+        'name': 'Darter Pro',
+        'drivers': [
+            actions.blacklist_psmouse,
+        ],
+    },
+    'darp10': {
+        'name': 'Darter Pro',
+        'drivers': [
+            actions.blacklist_psmouse,
+        ],
+    },
+    'darp10-b': {
+        'name': 'Darter Pro',
+        'drivers': [
+            actions.blacklist_psmouse,
+        ],
     },
 
     # Galago:
@@ -181,14 +225,14 @@ PRODUCTS = {
         'drivers': [
             actions.internal_mic_gain,
             actions.hidpi_scaling,
-	    ],
+        ],
     },
     'galp3': {
         'name': 'Galago Pro',
         'drivers': [
             actions.internal_mic_gain,
             actions.hidpi_scaling,
-	    ],
+        ],
     },
     'galp3-b': {
         'name': 'Galago Pro',
@@ -196,7 +240,7 @@ PRODUCTS = {
             actions.internal_mic_gain,
             actions.energystar_gsettings_override,
             actions.energystar_wakeonlan,
-	    ],
+        ],
     },
     'galp3-c': {
         'name': 'Galago Pro',
@@ -209,12 +253,21 @@ PRODUCTS = {
     'galp5': {
         'name': 'Galago Pro',
         'drivers': [
+            actions.blacklist_psmouse,
             actions.remove_nvidia_dynamic_power_one,
         ],
     },
     'galp6': {
         'name': 'Galago Pro',
-        'drivers': [],
+        'drivers': [
+            actions.blacklist_psmouse,
+        ],
+    },
+    'galp7': {
+        'name': 'Galago Pro',
+        'drivers': [
+            actions.blacklist_psmouse,
+        ],
     },
 
     # Gazelle:
@@ -294,13 +347,13 @@ PRODUCTS = {
         'name': 'Gazelle',
         'drivers': [
             actions.internal_mic_gain,
-	],
+        ],
     },
     'gaze13': {
         'name': 'Gazelle',
         'drivers': [
             actions.internal_mic_gain,
-	],
+        ],
     },
     'gaze14': {
         'name': 'Gazelle',
@@ -320,30 +373,42 @@ PRODUCTS = {
         'name': 'Gazelle',
         'drivers': [
             actions.blacklist_nvidia_i2c,
+            actions.blacklist_psmouse,
         ],
     },
     'gaze16-3060': {
         'name': 'Gazelle',
         'drivers': [
             actions.blacklist_nvidia_i2c,
+            actions.blacklist_psmouse,
         ],
     },
     'gaze16-3060-b': {
         'name': 'Gazelle',
         'drivers': [
             actions.blacklist_nvidia_i2c,
+            actions.blacklist_psmouse,
         ],
     },
     'gaze17-3050': {
         'name': 'Gazelle',
         'drivers': [
             actions.blacklist_nvidia_i2c,
+            actions.blacklist_psmouse,
         ],
     },
     'gaze17-3060-b': {
         'name': 'Gazelle',
         'drivers': [
             actions.blacklist_nvidia_i2c,
+            actions.blacklist_psmouse,
+        ],
+    },
+    'gaze18': {
+        'name': 'Gazelle',
+        'drivers': [
+            actions.blacklist_nvidia_i2c,
+            actions.blacklist_psmouse,
         ],
     },
     'gazu1': {
@@ -489,11 +554,33 @@ PRODUCTS = {
     },
     'lemp10': {
         'name': 'Lemur Pro',
-        'drivers': [],
+        'drivers': [
+            actions.blacklist_psmouse,
+        ],
     },
     'lemp11': {
         'name': 'Lemur Pro',
-        'drivers': [],
+        'drivers': [
+            actions.blacklist_psmouse,
+        ],
+    },
+    'lemp12': {
+        'name': 'Lemur Pro',
+        'drivers': [
+            actions.blacklist_psmouse,
+        ],
+    },
+    'lemp13': {
+        'name': 'Lemur Pro',
+        'drivers': [
+            actions.blacklist_psmouse,
+        ],
+    },
+    'lemp13-b': {
+        'name': 'Lemur Pro',
+        'drivers': [
+            actions.blacklist_psmouse,
+        ],
     },
 
     # Leopard:
@@ -596,6 +683,18 @@ PRODUCTS = {
             actions.displayport1_force_enable_audio,
         ],
     },
+    'meer7': {
+        'name': 'Meerkat',
+        'drivers': [],
+    },
+    'meer8': {
+        'name': 'Meerkat',
+        'drivers': [],
+    },
+    'meer8-b': {
+        'name': 'Meerkat',
+        'drivers': [],
+    },
 
     # Oryx:
     'orxp1': {
@@ -687,6 +786,7 @@ PRODUCTS = {
         'name': 'Oryx Pro',
         'drivers': [
             actions.blacklist_nvidia_i2c,
+            actions.blacklist_psmouse,
             actions.i915_initramfs,
         ],
     },
@@ -695,6 +795,31 @@ PRODUCTS = {
         'drivers': [
             actions.blacklist_nvidia_i2c,
             actions.i915_initramfs,
+            actions.blacklist_psmouse,
+        ],
+    },
+    'oryp10': {
+        'name': 'Oryx Pro',
+        'drivers': [
+            actions.blacklist_nvidia_i2c,
+            actions.i915_initramfs,
+            actions.blacklist_psmouse,
+        ],
+    },
+    'oryp11': {
+        'name': 'Oryx Pro',
+        'drivers': [
+            actions.blacklist_nvidia_i2c,
+            actions.i915_initramfs,
+            actions.blacklist_psmouse,
+        ],
+    },
+    'oryp12': {
+        'name': 'Oryx Pro',
+        'drivers': [
+            actions.blacklist_nvidia_i2c,
+            actions.i915_initramfs,
+            actions.blacklist_psmouse,
         ],
     },
 
@@ -742,6 +867,24 @@ PRODUCTS = {
         'name': 'Pangolin',
         'drivers': [
             actions.i8042_nomux,
+        ],
+    },
+    'pang12': {
+        'name': 'Pangolin',
+        'drivers': [
+            actions.touchpad_use_areas,
+        ],
+    },
+    'pang13': {
+        'name': 'Pangolin',
+        'drivers': [
+            actions.touchpad_use_areas,
+        ],
+    },
+    'pang14': {
+        'name': 'Pangolin',
+        'drivers': [
+            actions.touchpad_use_areas,
         ],
     },
     #'panv1': {'name': 'Pangolin Value'},  # FIXME: Not in model.py
@@ -943,6 +1086,14 @@ PRODUCTS = {
             actions.i8042_nomux,
         ],
     },
+    'serw13': {
+        'name': 'Serval WS',
+        'drivers': [
+            actions.blacklist_nvidia_i2c,
+            actions.i915_initramfs,
+            actions.blacklist_psmouse,
+        ],
+    },
 
     # Silverback:
     'silw1': {
@@ -981,6 +1132,10 @@ PRODUCTS = {
     },
 
     #Thelio:
+    'thelio-astra-a1': {
+        'name': 'Thelio Astra',
+        'drivers': [],
+    },
     'thelio-b1': {
         'name': 'Thelio',
         'drivers': [],
@@ -993,6 +1148,14 @@ PRODUCTS = {
         'name': 'Thelio',
         'drivers': [],
     },
+    'thelio-b4': {
+        'name': 'Thelio',
+        'drivers': [],
+    },
+    'thelio-b5': {
+        'name': 'Thelio',
+        'drivers': [],
+    },
     'thelio-r1': {
         'name': 'Thelio',
         'drivers': [],
@@ -1002,6 +1165,14 @@ PRODUCTS = {
         'drivers': [
             actions.hda_disable_power_save,
         ],
+    },
+        'thelio-r3': {
+        'name': 'Thelio',
+        'drivers': [],
+    },
+        'thelio-r4': {
+        'name': 'Thelio',
+        'drivers': [],
     },
     'thelio-major-b1': {
         'name': 'Thelio Major',
@@ -1016,6 +1187,10 @@ PRODUCTS = {
         'drivers': [],
     },
     'thelio-major-b3': {
+        'name': 'Thelio Major',
+        'drivers': [],
+    },
+        'thelio-major-b4': {
         'name': 'Thelio Major',
         'drivers': [],
     },
@@ -1038,6 +1213,18 @@ PRODUCTS = {
             actions.remove_usb_audio_load_microphone,
             actions.remove_usb_audio_load_spdif,
         ],
+    },
+    'thelio-major-r3': {
+        'name': 'Thelio Major',
+        'drivers': [],
+    },
+    'thelio-major-r4': {
+        'name': 'Thelio Major',
+        'drivers': [],
+    },
+    'thelio-major-r5': {
+        'name': 'Thelio Major',
+        'drivers': [],
     },
     'thelio-massive-b1': {
         'name': 'Thelio Massive',
@@ -1063,6 +1250,14 @@ PRODUCTS = {
             actions.remove_usb_audio_load_spdif,
         ],
     },
+    'thelio-mega-r2': {
+        'name': 'Thelio Mega',
+        'drivers': [],
+    },
+    'thelio-mega-r3': {
+        'name': 'Thelio Mega',
+        'drivers': [],
+    },
     'thelio-mira-b1': {
         'name': 'Thelio Mira',
         'drivers': [
@@ -1077,12 +1272,32 @@ PRODUCTS = {
         'name': 'Thelio Mira',
         'drivers': [],
     },
+    'thelio-mira-b4': {
+        'name': 'Thelio Mira',
+        'drivers': [],
+    },
+    'thelio-mira-b4.1': {
+        'name': 'Thelio Mira',
+        'drivers': [],
+    },
     'thelio-mira-r1': {
         'name': 'Thelio Mira',
         'drivers': [],
     },
     'thelio-mira-r2': {
         'name': 'Thelio Mira',
+        'drivers': [],
+    },
+    'thelio-mira-r3': {
+        'name': 'Thelio Mira',
+        'drivers': [],
+    },
+    'thelio-spark-b1': {
+        'name': 'Thelio Spark',
+        'drivers': [],
+    },
+    'thelio-spark-r1': {
+        'name': 'Thelio Spark',
         'drivers': [],
     },
 

@@ -43,7 +43,7 @@ CMDLINE_TEMPLATE = 'GRUB_CMDLINE_LINUX_DEFAULT="{}"'
 CMDLINE_CHECK_DEFAULT_RE = re.compile('^GRUB_CMDLINE_LINUX_DEFAULT')
 CMDLINE_ADD_DEFAULT_RE = re.compile('^GRUB_CMDLINE_LINUX="(.*)"$')
 
-LSPCI_RE = re.compile('^(.+) \[(.+)\]$')
+LSPCI_RE = re.compile(r'^(.+) \[(.+)\]$')
 
 WIFI_PM_DISABLE = """#!/bin/sh
 # Installed by system76-driver
@@ -1077,6 +1077,38 @@ class energystar_wakeonlan(FileAction):
         return _('Disable Wake-On-LAN on battery power for ENERGY STAR')
 
 
+TOUCHPAD_USE_AREAS_GSETTINGS_OVERRIDE = """[org.gnome.desktop.peripherals.touchpad]
+click-method='areas'
+"""
+
+class touchpad_use_areas(FileAction):
+    relpath = ('usr', 'share', 'glib-2.0', 'schemas',
+        '60_system76-driver-touchpad-use-areas.gschema.override')
+
+    _content = TOUCHPAD_USE_AREAS_GSETTINGS_OVERRIDE
+
+    @property
+    def content(self):
+        return self._content
+
+    def perform(self):
+        self.atomic_write(self.content, self.mode)
+        gsettings_dir = path.join('/', 'usr', 'share', 'glib-2.0', 'schemas')
+        cmd_compile_schemas = ['glib-compile-schemas', gsettings_dir + '/']
+        SubProcess.check_call(cmd_compile_schemas)
+
+    def get_isneeded(self):
+        if self.read() != self.content:
+            return True
+        st = os.stat(self.filename)
+        if stat.S_IMODE(st.st_mode) != self.mode:
+            return True
+        return False
+
+    def describe(self):
+        return _('Apply touchpad click-method default gsettings overrides')
+
+
 LIMIT_TDP_UDEV_RULE = """SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+="/usr/lib/system76-driver/system76-adjust-tdp --battery"
 SUBSYSTEM=="power_supply", ATTR{online}=="1", RUN+="/usr/lib/system76-driver/system76-adjust-tdp --ac\""""
 
@@ -1097,7 +1129,7 @@ action=/etc/acpi/system76-brightness-tdp.sh"""
 LIMIT_TDP_ACPI_ACTION = """#!/bin/sh
 /usr/lib/system76-driver/system76-adjust-tdp"""
 
-LIMIT_TDP_SCRIPT = """#!/bin/sh
+LIMIT_TDP_SCRIPT = r"""#!/bin/sh
 
 adjust_tdp ()
 {
@@ -1585,6 +1617,13 @@ class intel_idle_max_cstate_4(GrubAction):
 
     def describe(self):
         return _('Fix for freezes on some CML-U processors')
+
+class blacklist_psmouse(FileAction):
+    relpath = ('etc', 'modprobe.d', 'blacklist-psmouse.conf')
+    content = 'blacklist psmouse'
+
+    def describe(self):
+        return _('Avoid touchpad issues caused by PS/2 interface')
 
 
 
