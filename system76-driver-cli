@@ -62,7 +62,7 @@ try:
     log.info('product_version: %r', product_version)
 except KeyError:
     log.warning('invalid product_version: %r', product_version)
-    sys.exit(exitcode)
+#    sys.exit(exitcode)
 
 if os.getuid() != 0:
     log.error('must be run as root')

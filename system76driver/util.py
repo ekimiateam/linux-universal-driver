@@ -28,7 +28,7 @@ import tempfile
 import distro
 import subprocess
 
-from .model import determine_model_new
+from .model import *
 
 def dump_command(base, name, args):
     fp = open(path.join(base, name), 'xt')
@@ -105,7 +105,8 @@ def create_logs(homedir, func=dump_logs):
     return dst
 
 
-def send_logs(dst):
+def send_logs():
+    dst = path.join(os.environ['HOME'], "lud-logs.tgz")
     print(dst)
     hostname = subprocess.run('hostname', capture_output=True, shell=True, text=True).stdout.strip()
     desturl = "https://drive.ekimia.fr/public.php/webdav/"+hostname+"-lud-logs.tgz"

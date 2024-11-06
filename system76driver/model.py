@@ -93,25 +93,25 @@ TABLES = {
         'NS5x_NS7xAU': 'jaguar3',
 
         
-       # 'NL40_50CU': 'pulsar1',
-       # 'NL4x_NL5xLU': 'polar2',
+        # 'NL40_50CU': 'pulsar1',
+        # 'NL4x_NL5xLU': 'polar2',
         #'NLx0MU': 'pulsar3',
         #'NLxxPUx': 'pulsar4',
 
-        
+        #Polar family
         'NL40_50CU': 'polar1', # to be fixed ..
         'NL4x_NL5xLU': 'polar2',
         'NLx0MU': 'polar3',
         'NLxxPUx': 'polar4',
 
 
-        
+        #Neutron family
         'L141CU': 'neutron1',
         'L141MU': 'neutron2',
         'L140PU': 'neutron3',
         
         'N150ZU': 'bionic1',
-        
+        #Drift Family 
         'N14xWU': 'drift3',
 
     },

@@ -31,6 +31,7 @@ from gi.repository import GLib, Gtk
 
 from . import __version__, get_datafile
 from .mockable import SubProcess
+from .util import *
 from .actions import ActionRunner
 
 
@@ -159,16 +160,16 @@ class UI:
         self.start_worker()
 
     def create_worker(self):
-        SubProcess.check_call(['pkexec', 'system76-driver-cli', '--logs', self.args.home])
+        SubProcess.check_call(['pkexec', './system76-driver-cli', '--logs', self.args.home])
         GLib.idle_add(self.on_create_complete)
 
     def on_create_complete(self):
         self.thread.join()
         self.thread = None
         self.set_sensitive(True)
-        send_logs(tgz)
+        send_logs()
         self.set_notify('gtk-ok',
-            _('A log file  : '+tgz+' was created .\n and sent to your manufacturer')
+            _('A log file  was created .\n and sent to your manufacturer')
         )
 
     def onCreateClicked(self, button):
