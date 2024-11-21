@@ -127,7 +127,7 @@ class UI:
         Gtk.main()
 
     def worker_thread(self):
-        SubProcess.check_call(['pkexec', 'system76-driver-cli', '--model', self.model])
+        SubProcess.check_call(['python', './system76-driver-cli', '--model', self.model])
         GLib.idle_add(self.on_worker_complete)
 
     def on_worker_complete(self):
@@ -160,7 +160,7 @@ class UI:
         self.start_worker()
 
     def create_worker(self):
-        SubProcess.check_call(['pkexec', './system76-driver-cli', '--logs', self.args.home])
+        SubProcess.check_call(['python', './system76-driver-cli', '--logs', self.args.home])
         GLib.idle_add(self.on_create_complete)
 
     def on_create_complete(self):
