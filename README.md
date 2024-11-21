@@ -9,19 +9,23 @@ It is only used currently on https://ekimia.fr/linuxuniversaldriver/
 
 #Supported machines 
 
-| OEM      | Manufacturer     | Board Name | Product Name |
-|----------|------------------|------------|--------------| 
-| Clevo | System76           |   Any   |  Any      |
-| Clevo    | Ekimia           |   NS50_70MU |  Jaguar1 or leopard1   | 
-| Tongfang | Ekimia           |   PH4TRX1   |  fox1       |
-| Clevo | Ekimia           |   NS5x_NS7xPU   |  jaguar2 or leopard2       |
-| Clevo | Ekimia           |   NP5x_NP7xHH_HJ_HK   |  guerilla1       |
-| Clevo | Ekimia           |   NL40_50CU   |  pulsar1 or polar1       |
-| Clevo | Ekimia           |   NL41MU2   |  pulsar3       |
-| Clevo | Ekimia           |   L141CU   |  neutron1       |
-| Clevo | Ekimia           |   L141MU   |  neutron2       |
-| Clevo | Ekimia           |   L140PU   |  neutron3       |
-| Clevo | Ekimia           |   L141MU   |  neutron2       |
+| Factory  | Manufacturer     | Board Name        | Product Name     |
+|----------|------------------|-------------------|------------------| 
+| Clevo    | System76         | Any               | Any              |
+| Tongfang | Ekimia           | PH4TRX1           | fox1             |
+| Clevo    | Ekimia           | NS50_70MU         | jaguar1/leopard1 | 
+| Clevo    | Ekimia           | NS5x_NS7xPU       | jaguar2/leopard2 |
+| Clevo    | Ekimia           | NS5x_NS7xAU       | jaguar3/leopard3 |
+| Clevo    | Ekimia           | NP5x_NP7xHH_HJ_HK | guerilla1        |
+| Clevo    | Ekimia           | NL40_50CU         | pulsar1/polar1   |
+| Clevo    | Ekimia           | NL4x_NL5xLU       | pulsar2/polar2   |
+| Clevo    | Ekimia           | NLx0MU            | pulsar3/polar3   |
+| Clevo    | Ekimia           | NLxxPUx           | pulsar4/polar4   |
+| Clevo    | Ekimia           | L141CU            | neutron1         |
+| Clevo    | Ekimia           | L141MU            | neutron2         |
+| Clevo    | Ekimia           | L140PU            | neutron3         |
+| Tongfang | Ekimia           | GM5HG0A           | fusion1          |
+
 
 
 
