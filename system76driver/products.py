@@ -1519,6 +1519,15 @@ PRODUCTS = {
         ],	      
     },
 
+    'fusion1': {
+        'name': 'Fusion 1',
+        'drivers': [
+            actions.i8042_nomux,
+            actions.yt6801_driver,
+        ],	      
+    },
+
+
 
     
     

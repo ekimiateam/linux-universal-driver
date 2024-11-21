@@ -83,11 +83,14 @@ TABLES = {
         'K8N-DL': 'wilp2',
         'KFN5-D SLI': 'wilp3',
         'DP35DP': 'wilp5',
+
+        #Ekimia models 
         
         'PH4TRX1': 'fox1',
         
         'NP5x_NP7xHH_HJ_HK': 'guerilla1',
-        
+
+        #jaguar family
         'NS50MU': 'jaguar1',
         'NS5x_NS7xPU': 'jaguar2',
         'NS5x_NS7xAU': 'jaguar3',
@@ -98,7 +101,7 @@ TABLES = {
         #'NLx0MU': 'pulsar3',
         #'NLxxPUx': 'pulsar4',
 
-        #Polar family
+        #Polar family - includes pulsar , same board
         'NL40_50CU': 'polar1', # to be fixed ..
         'NL4x_NL5xLU': 'polar2',
         'NLx0MU': 'polar3',
@@ -110,9 +113,14 @@ TABLES = {
         'L141MU': 'neutron2',
         'L140PU': 'neutron3',
         
+        #Bionic
         'N150ZU': 'bionic1',
+        
         #Drift Family 
         'N14xWU': 'drift3',
+
+        #Fusion family 
+        'GM5HG0A': 'fusion1',
 
     },
     'system-product-name': {
