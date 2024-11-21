@@ -1643,7 +1643,7 @@ class rgb_keyboard_driver(Action):
        
 
     def perform(self):
-        command = 'apt install -y'+" ./system76driver/data/tuxedo-keyboard_latest_all.deb"
+        command = 'apt install -y'+" ./system76driver/data/tuxedo-drivers_latest_all.deb"
         os.system(command)
 
     def isneeded(self):
@@ -1682,6 +1682,24 @@ class linux_controlcenter_app(Action):
 
     def describe(self):
         return _('Install  the linux controlcenter app for better fan curve')
+
+
+
+class yt6801_driver(Action):
+       
+
+    def perform(self):
+        command = 'apt install -y'+" ./system76driver/data/tuxedo-yt6801_latest.deb"
+        os.system(command)
+
+    def isneeded(self):
+        return True
+    def get_isneeded(self):
+        return True
+
+    def describe(self):
+        return _('Install  the yt6801ethernet driver')
+
 
 
 
