@@ -127,7 +127,7 @@ class UI:
         Gtk.main()
 
     def worker_thread(self):
-        SubProcess.check_call(['python', './system76-driver-cli', '--model', self.model])
+        SubProcess.check_call(['python3', './system76-driver-cli', '--model', self.model])
         GLib.idle_add(self.on_worker_complete)
 
     def on_worker_complete(self):
