@@ -1527,6 +1527,23 @@ PRODUCTS = {
         ],	      
     },
 
+      'kevlar1.amd': {
+        'name': 'Kevlar 1 AMD',
+        'drivers': [
+            actions.i8042_nomux,
+            actions.yt6801_driver,
+        ],	      
+    },
+
+
+      'kevlar1.intel': {
+        'name': 'Kevlar 1 INTEL',
+        'drivers': [
+            actions.i8042_nomux,
+            actions.yt6801_driver,
+        ],	      
+    },
+
 
 
     

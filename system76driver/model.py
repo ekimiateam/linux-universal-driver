@@ -122,6 +122,11 @@ TABLES = {
         #Fusion family 
         'GM5HG0A': 'fusion1',
 
+        #Kevlar family
+
+        'GX4HRXL': 'kevlar1.amd',
+        'GX4MRXL': 'kevlar1.intel'
+
     },
     'system-product-name': {
         'MS-1012': 'gazv1',
