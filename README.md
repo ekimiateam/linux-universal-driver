@@ -25,6 +25,10 @@ It is only used currently on https://ekimia.fr/linuxuniversaldriver/
 | Clevo    | Ekimia           | L141MU            | neutron2         |
 | Clevo    | Ekimia           | L140PU            | neutron3         |
 | Tongfang | Ekimia           | GM5HG0A           | fusion1          |
+| Tongfang | Ekimia           | GX4HRXL           | kevlar.amd       |
+| Tongfang | Ekimia           | GX4MRXL           | kevlar.intel     |
+
+
 
 
 
