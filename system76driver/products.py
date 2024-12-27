@@ -1544,6 +1544,13 @@ PRODUCTS = {
         ],	      
     },
 
+      'surfacego1': {
+        'name': 'Surface Go 1',
+        'drivers': [
+            
+        ],	      
+    },
+
 
 
     

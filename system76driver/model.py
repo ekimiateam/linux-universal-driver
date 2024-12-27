@@ -125,7 +125,11 @@ TABLES = {
         #Kevlar family
 
         'GX4HRXL': 'kevlar1.amd',
-        'GX4MRXL': 'kevlar1.intel'
+        'GX4MRXL': 'kevlar1.intel',
+
+        #Microsoft Surface
+        'Surface Go': 'surfacego1',
+
 
     },
     'system-product-name': {
