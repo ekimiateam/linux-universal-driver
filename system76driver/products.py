@@ -1559,7 +1559,13 @@ PRODUCTS = {
         ],	      
     },
 
-
+       'macbookair72': {
+        'name': 'MacBook Air early 2015',
+        'drivers': [
+            actions.isight_webcam,
+            actions.mbpfan,
+        ],	      
+    },
 
 
     
