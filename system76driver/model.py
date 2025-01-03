@@ -130,6 +130,10 @@ TABLES = {
         #Microsoft Surface
         'Surface Go': 'surfacego1',
 
+        #Apple
+        'MacBookAir6,2': 'macbookair62',
+        'MacBookAir7,2': 'macbookair72',
+
 
     },
     'system-product-name': {

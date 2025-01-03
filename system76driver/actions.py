@@ -1701,6 +1701,38 @@ class yt6801_driver(Action):
         return _('Install  the yt6801ethernet driver')
 
 
+class isight_webcam(Action):
+       
+
+    def perform(self):
+        command = 'cp ./system76driver/data/isight.fw /lib/firmware/isight.fw'
+        os.system(command)
+
+    def isneeded(self):
+        return True
+    def get_isneeded(self):
+        return True
+
+    def describe(self):
+        return _('copy the isight webcam firmware ')
+
+
+
+class mbpfan(Action):
+       
+
+    def perform(self):
+        command = 'apt install mbpfan'
+        os.system(command)
+
+    def isneeded(self):
+        return True
+    def get_isneeded(self):
+        return True
+
+    def describe(self):
+        return _('Install mbpfan daemon to better handle Apple fans')
+
 
 
 

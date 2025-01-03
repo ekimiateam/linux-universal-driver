@@ -1551,6 +1551,15 @@ PRODUCTS = {
         ],	      
     },
 
+      'macbookair62': {
+        'name': 'MacBook Air Mid 2013',
+        'drivers': [
+            actions.isight_webcam,
+            actions.mbpfan,
+        ],	      
+    },
+
+
 
 
     
