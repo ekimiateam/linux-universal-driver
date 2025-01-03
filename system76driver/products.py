@@ -1554,7 +1554,7 @@ PRODUCTS = {
       'macbookair62': {
         'name': 'MacBook Air Mid 2013',
         'drivers': [
-            actions.isight_webcam,
+            actions.facetimehd_webcam,
             actions.mbpfan,
         ],	      
     },
@@ -1562,7 +1562,7 @@ PRODUCTS = {
        'macbookair72': {
         'name': 'MacBook Air early 2015',
         'drivers': [
-            actions.isight_webcam,
+            actions.facetimehd_webcam,
             actions.mbpfan,
         ],	      
     },

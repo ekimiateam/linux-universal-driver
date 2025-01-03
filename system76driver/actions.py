@@ -1718,6 +1718,25 @@ class isight_webcam(Action):
 
 
 
+class facetimehd_webcam(Action):
+       
+
+    def perform(self):
+        command = 'apt install -y ./system76driver/data/facetimehd-firmware_0.1-1.deb'
+        os.system(command)
+        command = 'apt install -y ./system76driver/data/facetimehd-dkms_latest_amd64.deb'
+        os.system(command)
+
+    def isneeded(self):
+        return True
+    def get_isneeded(self):
+        return True
+
+    def describe(self):
+        return _('copy the facetimehd webcam firmware + install the experimental FHD driver')
+
+
+
 class mbpfan(Action):
        
 
