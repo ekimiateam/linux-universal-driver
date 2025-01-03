@@ -130,9 +130,7 @@ TABLES = {
         #Microsoft Surface
         'Surface Go': 'surfacego1',
 
-        #Apple
-        'MacBookAir6,2': 'macbookair62',
-        'MacBookAir7,2': 'macbookair72',
+      
 
 
     },
@@ -164,6 +162,10 @@ TABLES = {
         'M860TU': 'serp5',
         'fox1' : 'fox1',
         'jaguar1': 'jaguar1',
+        
+        #Apple
+        'MacBookAir6,2': 'macbookair62',
+        'MacBookAir7,2': 'macbookair72',
     },
     'system-version': {
         'addw1': 'addw1',
