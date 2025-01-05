@@ -1757,9 +1757,7 @@ class enableIPU3webcams(Action):
        
 
     def perform(self):
-        command = 'zstd -d -f /lib/firmware/intel/ipu/irci_irci_ecr-master_20161208_0213_20170112_1500.bin.zst'
-        os.system(command)
-        command = 'mv /lib/firmware/intel/ipu/irci_irci_ecr-master_20161208_0213_20170112_1500.bin /lib/firmware/intel/ipu3-fw.bin'
+        command = 'zstd -d -f /lib/firmware/intel/ipu3-fw.bin.zst'
         os.system(command)
         command = 'apt install -y gstreamer1.0-libcamera pipewire-libcamera libcamera0.2 libspa-0.2-libcamera libcamera-v4l2  libcamera-tools  libcamera-ipa'
         os.system(command)
