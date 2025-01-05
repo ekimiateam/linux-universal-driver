@@ -1753,5 +1753,47 @@ class mbpfan(Action):
         return _('Install mbpfan daemon to better handle Apple fans')
 
 
+class enableIPU3webcams(Action):
+       
+
+    def perform(self):
+        command = 'tar --zstd -xvf /lib/firmware/intel/ipu3-fw.bin.zst'
+        os.system(command)
+        command = 'apt install -y gstreamer1.0-libcamera pipewire-libcamera libcamera0.2 libspa-0.2-libcamera libcamera-v4l2  libcamera-tools  libcamera-ipa'
+        os.system(command)
+
+
+
+    def isneeded(self):
+        return True
+    def get_isneeded(self):
+        return True
+
+    def describe(self):
+        return _('Enable IPU3 webcam support')
+
+
+
+class enablesurfacekernel(Action):
+       
+
+    def perform(self):
+        command = 'wget -qO - https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc | gpg --dearmor | dd of=/etc/apt/trusted.gpg.d/linux-surface.gpg'
+        os.system(command)
+        command = 'echo "deb [arch=amd64] https://pkg.surfacelinux.com/debian release main" | tee /etc/apt/sources.list.d/linux-surface.list'
+        os.system(command)
+        command = 'apt install -y linux-image-surface linux-headers-surface libwacom-surface iptsd'
+        os.system(command)
+
+    def isneeded(self):
+        return True
+    def get_isneeded(self):
+        return True
+
+    def describe(self):
+        return _('Enable surface kernel')
+
+
+
 
 

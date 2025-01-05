@@ -1547,6 +1547,8 @@ PRODUCTS = {
       'surfacego1': {
         'name': 'Surface Go 1',
         'drivers': [
+            actions.enablesurfacekernel,
+            actions.enableIPU3webcams,
             
         ],	      
     },
