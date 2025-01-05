@@ -1757,7 +1757,7 @@ class enableIPU3webcams(Action):
        
 
     def perform(self):
-        command = 'zstd -d /lib/firmware/intel/ipu/irci_irci_ecr-master_20161208_0213_20170112_1500.bin.zst'
+        command = 'zstd -d -f /lib/firmware/intel/ipu/irci_irci_ecr-master_20161208_0213_20170112_1500.bin.zst'
         os.system(command)
         command = 'mv /lib/firmware/intel/ipu/irci_irci_ecr-master_20161208_0213_20170112_1500.bin /lib/firmware/intel/ipu3-fw.bin'
         os.system(command)
