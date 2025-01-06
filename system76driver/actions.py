@@ -1759,7 +1759,7 @@ class enableIPU3webcams(Action):
     def perform(self):
         command = 'zstd -d -f /lib/firmware/intel/ipu3-fw.bin.zst'
         os.system(command)
-        command = 'apt install -y gstreamer1.0-libcamera pipewire-libcamera libcamera0.2 libspa-0.2-libcamera libcamera-v4l2  libcamera-tools  libcamera-ipa'
+        command = 'apt install -y gstreamer1.0-libcamera pipewire-libcamera libcamera0.2 libspa-0.2-libcamera libcamera-v4l2  libcamera-tools  libcamera-ipa libcamera-v4l2'
         os.system(command)
 
     def isneeded(self):
