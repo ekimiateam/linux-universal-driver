@@ -1532,6 +1532,7 @@ PRODUCTS = {
         'drivers': [
             actions.i8042_nomux,
             actions.yt6801_driver,
+            actions.disable_ec_wakeup_events,
         ],	      
     },
 

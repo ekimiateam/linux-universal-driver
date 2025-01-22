@@ -1792,6 +1792,18 @@ class enablesurfacekernel(Action):
         return _('Enable surface kernel')
 
 
+class disable_ec_wakeup_events(GrubAction):
+    """
+    Add acpi.ec_no_wakeup=1 to GRUB_CMDLINE_LINUX_DEFAULT
+
+    This fix a problem where AMD boards would make up few seconds after entering S0iX
+    """
+    add = ('acpi.ec_no_wakeup=1',)
+
+    def describe(self):
+        return _('disable wakeups from EC in S0 ')
+
+
 
 
 
