@@ -1571,6 +1571,17 @@ PRODUCTS = {
     },
 
 
+       'imac112': {
+        'name': 'iMac mi 2010',
+        'drivers': [
+            actions.mbpfan,
+            actions.backlight_vendor,
+        ],	      
+    },
+
+
+
+
     
     
 }

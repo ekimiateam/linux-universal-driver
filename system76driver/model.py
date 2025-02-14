@@ -166,6 +166,8 @@ TABLES = {
         #Apple
         'MacBookAir6,2': 'macbookair62',
         'MacBookAir7,2': 'macbookair72',
+        'iMac11,2' : 'imac112'
+
     },
     'system-version': {
         'addw1': 'addw1',
