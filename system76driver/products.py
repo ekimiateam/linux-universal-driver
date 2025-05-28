@@ -1545,6 +1545,23 @@ PRODUCTS = {
         ],	      
     },
 
+       'lidar1': {
+        'name': 'Lidar 1',
+        'drivers': [
+            actions.i8042_nomux,
+            actions.yt6801_driver,
+            actions.disable_ec_wakeup_events,
+        ],	      
+    },
+        'lidar2': {
+        'name': 'Lidar 2',
+        'drivers': [
+            actions.i8042_nomux,
+            actions.yt6801_driver,
+            actions.disable_ec_wakeup_events,
+        ],	      
+    },
+
       'surfacego1': {
         'name': 'Surface Go 1',
         'drivers': [
