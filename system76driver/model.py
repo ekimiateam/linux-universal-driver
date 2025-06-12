@@ -130,6 +130,8 @@ TABLES = {
         #Lidar Family
         'GX5HRXG' : 'lidar1',
         'X5SP4NAG': 'lidar2',
+        'X5KK4NAG': 'lidar2',
+        
 
         #Microsoft Surface
         'Surface Go': 'surfacego1',
