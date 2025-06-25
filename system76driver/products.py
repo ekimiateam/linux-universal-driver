@@ -1544,6 +1544,14 @@ PRODUCTS = {
             actions.yt6801_driver,
         ],	      
     },
+        'kevlar2': {
+        'name': 'Kevlar 2',
+        'drivers': [
+            actions.i8042_nomux,
+            actions.yt6801_driver,
+            actions.disable_ec_wakeup_events,
+        ],	      
+    },
 
        'lidar1': {
         'name': 'Lidar 1',

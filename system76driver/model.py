@@ -126,7 +126,10 @@ TABLES = {
 
         'GX4HRXL': 'kevlar1.amd',
         'GX4MRXL': 'kevlar1.intel',
+        'X4KK4NAL': 'kevlar2',
+        'X4SP4NAL': 'kevlar2',
 
+        
         #Lidar Family
         'GX5HRXG' : 'lidar1',
         'X5SP4NAG': 'lidar2',
