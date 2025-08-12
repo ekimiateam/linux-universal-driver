@@ -607,6 +607,19 @@ class i8042_reset_nomux(GrubAction):
     def describe(self):
         return _('Enable Touchpad')
 
+
+class i8042_reset_nomux_noloop_nopnp(GrubAction):
+    """
+    Add   i8042.nomux=1 i8042.reset=1,1,1 i8042.noloop=1 i8042.nopnp=1 to GRUB_CMDLINE_LINUX_DEFAULT
+
+    """
+
+    add = ('i8042.nomux=1 i8042.reset=1,1,1 i8042.noloop=1 i8042.nopnp=1',)
+
+    def describe(self):
+        return _('make touchdpad / Kb return after wake ')
+
+
 class pang10_nvme_fix(GrubAction):
     """
     Add nvme_core.default_ps_max_latency_us=10000 to GRUB_CMDLINE_LINUX_DEFAULT
