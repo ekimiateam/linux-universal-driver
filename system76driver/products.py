@@ -1564,7 +1564,7 @@ PRODUCTS = {
         'lidar2': {
         'name': 'Lidar 2',
         'drivers': [
-            actions.i8042_nomux,
+            actions.i8042_reset_nomux_noloop_nopnp,
             actions.yt6801_driver,
             actions.disable_ec_wakeup_events,
         ],	      
