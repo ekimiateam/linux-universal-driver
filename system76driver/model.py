@@ -126,6 +126,7 @@ TABLES = {
 
         'GX4HRXL': 'kevlar1.amd',
         'GX4MRXL': 'kevlar1.intel',
+        'X4HP4NAL': 'kevlar1.amd',
         'X4KK4NAL': 'kevlar2',
         'X4SP4NAL': 'kevlar2',
 
