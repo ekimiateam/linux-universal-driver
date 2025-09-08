@@ -133,6 +133,7 @@ TABLES = {
         
         #Lidar Family
         'GX5HRXG' : 'lidar1',
+        'X5HP4NAG' : 'lidar1',
         'X5SP4NAG': 'lidar2',
         'X5KK4NAG': 'lidar2',
         

@@ -1530,7 +1530,7 @@ PRODUCTS = {
       'kevlar1.amd': {
         'name': 'Kevlar 1 AMD',
         'drivers': [
-            actions.i8042_nomux,
+            actions.i8042_reset_nomux_noloop_nopnp,
             actions.yt6801_driver,
             actions.disable_ec_wakeup_events,
         ],	      
@@ -1540,14 +1540,14 @@ PRODUCTS = {
       'kevlar1.intel': {
         'name': 'Kevlar 1 INTEL',
         'drivers': [
-            actions.i8042_nomux,
+            actions.i8042_reset_nomux_noloop_nopnp,
             actions.yt6801_driver,
         ],	      
     },
         'kevlar2': {
         'name': 'Kevlar 2',
         'drivers': [
-            actions.i8042_nomux,
+            actions.i8042_reset_nomux_noloop_nopnp,
             actions.yt6801_driver,
             actions.disable_ec_wakeup_events,
         ],	      
@@ -1556,7 +1556,7 @@ PRODUCTS = {
        'lidar1': {
         'name': 'Lidar 1',
         'drivers': [
-            actions.i8042_nomux,
+            actions.i8042_reset_nomux_noloop_nopnp,
             actions.yt6801_driver,
             actions.disable_ec_wakeup_events,
         ],	      
