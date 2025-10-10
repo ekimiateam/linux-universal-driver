@@ -11,9 +11,9 @@ It is only used currently on https://ekimia.fr/linuxuniversaldriver/
 
 | Factory  | Manufacturer     | Board Name        | Product Name     |
 |----------|------------------|-------------------|------------------| 
-| Apple?   | Apple            | MacBookAir6,2     | macbookair62     |
-| Apple?   | Apple            | MacBookAir7,2     | macbookair72     |
-| Apple?   | Apple            | iMac11,2          | imac112          |
+| Apple    | Apple            | MacBookAir6,2     | macbookair62     |
+| Apple    | Apple            | MacBookAir7,2     | macbookair72     |
+| Apple    | Apple            | iMac11,2          | imac112          |
 | Clevo    | System76         | Any               | Any              |
 | Tongfang | Ekimia           | PH4TRX1           | fox1             |
 | Clevo    | Ekimia           | NS50_70MU         | jaguar1/leopard1 | 
@@ -30,6 +30,8 @@ It is only used currently on https://ekimia.fr/linuxuniversaldriver/
 | Tongfang | Ekimia           | GM5HG0A           | fusion1          |
 | Tongfang | Ekimia           | GX4HRXL           | kevlar.amd       |
 | Tongfang | Ekimia           | GX4MRXL           | kevlar.intel     |
+| AiStone  | Ekimia           | X6PR55*1          | rebel1           |
+
 
 
 

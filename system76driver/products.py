@@ -1420,7 +1420,7 @@ PRODUCTS = {
         ],
     },
 
-     'pulsar4': {
+    'pulsar4': {
         'name': 'Pulsar 4',
         'drivers': [
             actions.i8042_nomux,
@@ -1443,7 +1443,7 @@ PRODUCTS = {
 
     
 
-      'leopard1': {
+    'leopard1': {
         'name': 'Leopard 1',
         'drivers': [
             actions.rgb_keyboard_driver,
@@ -1451,7 +1451,7 @@ PRODUCTS = {
         ],
     },
 
-      'jaguar1': {
+    'jaguar1': {
         'name': 'Jaguar or leopard 1',
         'drivers': [
             actions.rgb_keyboard_driver,
@@ -1459,7 +1459,7 @@ PRODUCTS = {
         ],
     },
 
-     'jaguar2': {
+    'jaguar2': {
         'name': 'Jaguar or leopard 2',
         'drivers': [
             actions.rgb_keyboard_driver,
@@ -1468,7 +1468,7 @@ PRODUCTS = {
     },
 
 
-      'jaguar3': {
+    'jaguar3': {
         'name': 'Jaguar or leopard 3',
         'drivers': [
             actions.rgb_keyboard_driver,
@@ -1477,7 +1477,7 @@ PRODUCTS = {
         ],
     },
 
-      'neutron1': {
+    'neutron1': {
         'name': 'Neutron 1',
         'drivers': [
             actions.i8042_nomux,
@@ -1485,7 +1485,7 @@ PRODUCTS = {
         ],
     },
 
-      'neutron2': {
+    'neutron2': {
         'name': 'Neutron 2',
         'drivers': [
             actions.i8042_nomux,
@@ -1493,7 +1493,7 @@ PRODUCTS = {
         ],
     },
 
-      'neutron3': {
+    'neutron3': {
         'name': 'Neutron 3',
         'drivers': [
             actions.i8042_nomux,
@@ -1503,7 +1503,7 @@ PRODUCTS = {
         ],
     },
 
-      'bionic1': {
+    'bionic1': {
         'name': 'Bionic 1',
         'drivers': [
             actions.i8042_nomux,
@@ -1527,7 +1527,7 @@ PRODUCTS = {
         ],	      
     },
 
-      'kevlar1.amd': {
+    'kevlar1.amd': {
         'name': 'Kevlar 1 AMD',
         'drivers': [
             actions.i8042_reset_nomux_noloop_nopnp,
@@ -1537,14 +1537,15 @@ PRODUCTS = {
     },
 
 
-      'kevlar1.intel': {
+    'kevlar1.intel': {
         'name': 'Kevlar 1 INTEL',
         'drivers': [
             actions.i8042_reset_nomux_noloop_nopnp,
             actions.yt6801_driver,
         ],	      
     },
-        'kevlar2': {
+
+    'kevlar2': {
         'name': 'Kevlar 2',
         'drivers': [
             actions.i8042_reset_nomux_noloop_nopnp,
@@ -1553,7 +1554,7 @@ PRODUCTS = {
         ],	      
     },
 
-       'lidar1': {
+    'lidar1': {
         'name': 'Lidar 1',
         'drivers': [
             actions.i8042_reset_nomux_noloop_nopnp,
@@ -1561,7 +1562,8 @@ PRODUCTS = {
             actions.disable_ec_wakeup_events,
         ],	      
     },
-        'lidar2': {
+
+    'lidar2': {
         'name': 'Lidar 2',
         'drivers': [
             actions.i8042_reset_nomux_noloop_nopnp,
@@ -1570,7 +1572,14 @@ PRODUCTS = {
         ],	      
     },
 
-      'surfacego1': {
+    'rebel1': {
+        'name': 'Rebel 1',
+        'drivers': [
+            actions.yt6801_driver,
+        ],	      
+    },
+
+    'surfacego1': {
         'name': 'Surface Go 1',
         'drivers': [
             actions.enablesurfacekernel,
@@ -1579,7 +1588,7 @@ PRODUCTS = {
         ],	      
     },
 
-      'macbookair62': {
+    'macbookair62': {
         'name': 'MacBook Air Mid 2013',
         'drivers': [
             actions.facetimehd_webcam,
@@ -1587,7 +1596,7 @@ PRODUCTS = {
         ],	      
     },
 
-       'macbookair72': {
+    'macbookair72': {
         'name': 'MacBook Air early 2015',
         'drivers': [
             actions.facetimehd_webcam,
@@ -1596,17 +1605,12 @@ PRODUCTS = {
     },
 
 
-       'imac112': {
+    'imac112': {
         'name': 'iMac mi 2010',
         'drivers': [
             actions.mbpfan,
             actions.backlight_vendor,
         ],	      
     },
-
-
-
-
-    
     
 }
