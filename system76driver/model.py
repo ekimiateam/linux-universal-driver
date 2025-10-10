@@ -138,8 +138,9 @@ TABLES = {
         'X5KK4NAG': 'lidar2',
 
         # Rebel Family
-        'X6PR5551' : 'rebel1',
-        'X6PR5561' : 'rebel1',
+        'X6RP5551' : 'rebel1',
+        'X6RP5561' : 'rebel1',
+        'X6RP5571' : 'rebel1',
 
         #Microsoft Surface
         'Surface Go': 'surfacego1',
