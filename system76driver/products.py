@@ -1605,6 +1605,14 @@ PRODUCTS = {
     },
 
 
+    'macbookpro121': {
+        'name': 'MacBook Pro early 2015',
+        'drivers': [
+            actions.facetimehd_webcam,
+            actions.mbpfan,
+        ],	      
+    },
+
     'imac112': {
         'name': 'iMac mi 2010',
         'drivers': [
