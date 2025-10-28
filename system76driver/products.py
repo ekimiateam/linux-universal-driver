@@ -1604,7 +1604,13 @@ PRODUCTS = {
         ],	      
     },
 
-
+    'macbookpro111': {
+        'name': 'MacBook Pro late 2013',
+        'drivers': [
+            actions.facetimehd_webcam,
+            actions.mbpfan,
+        ],	      
+    },
     'macbookpro121': {
         'name': 'MacBook Pro early 2015',
         'drivers': [
