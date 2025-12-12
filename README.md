@@ -3,7 +3,7 @@
 This program installs drivers and provides restore functionality for linux powered
 machines.
 
-This software is based on system76-driver project ( Thanks to them ! )
+This software is based on <a href="https://support.system76.com/articles/system76-driver/"> system76-driver project </a> ( Thanks to them ! )
 
 It is only used currently on https://ekimia.fr/linuxuniversaldriver/
 
