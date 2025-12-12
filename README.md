@@ -7,7 +7,9 @@ This software is based on system76-driver project ( Thanks to them ! )
 
 It is only used currently on https://ekimia.fr/linuxuniversaldriver/
 
-#Supported machines 
+## Supported machines 
+
+<details><summary><b>Apple</b></summary>
 
 | Factory  | Manufacturer     | Board Name        | Product Name     |
 |----------|------------------|-------------------|------------------| 
@@ -16,8 +18,23 @@ It is only used currently on https://ekimia.fr/linuxuniversaldriver/
 | Apple    | Apple            | MacBookPro11,1    | macbookair111    |
 | Apple    | Apple            | MacBookPro12,1    | macbookair121    |
 | Apple    | Apple            | iMac11,2          | imac112          |
+
+</details>
+
+<details><summary><b>System76</b></summary>
+  
+| Factory  | Manufacturer     | Board Name        | Product Name     |
+|----------|------------------|-------------------|------------------| 
 | Clevo    | System76         | Any               | Any              |
-| Tongfang | Ekimia           | PH4TRX1           | fox1             |
+
+</details>
+
+
+
+<details><summary><b>Ekimia</b></summary>
+  
+| Factory  | Manufacturer     | Board Name        | Product Name     |
+|----------|------------------|-------------------|------------------| 
 | Clevo    | Ekimia           | NS50_70MU         | jaguar1/leopard1 | 
 | Clevo    | Ekimia           | NS5x_NS7xPU       | jaguar2/leopard2 |
 | Clevo    | Ekimia           | NS5x_NS7xAU       | jaguar3/leopard3 |
@@ -29,12 +46,14 @@ It is only used currently on https://ekimia.fr/linuxuniversaldriver/
 | Clevo    | Ekimia           | L141CU            | neutron1         |
 | Clevo    | Ekimia           | L141MU            | neutron2         |
 | Clevo    | Ekimia           | L140PU            | neutron3         |
+| Tongfang | Ekimia           | PH4TRX1           | fox1             |
 | Tongfang | Ekimia           | GM5HG0A           | fusion1          |
 | Tongfang | Ekimia           | GX4HRXL           | kevlar.amd       |
 | Tongfang | Ekimia           | GX4MRXL           | kevlar.intel     |
 | AiStone  | Ekimia           | X6RP55*1          | rebel1           |
 
 
+</details>
 
 
 
@@ -45,7 +64,8 @@ It is only used currently on https://ekimia.fr/linuxuniversaldriver/
 
 
 
-# Using LUD
+
+## Using LUD
 
 You can start quickly the GUI by double cliking ( or launch as a program ) on startlud.sh
 
