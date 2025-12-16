@@ -160,7 +160,7 @@ class UI:
         self.start_worker()
 
     def create_worker(self):
-        SubProcess.check_call(['python', './system76-driver-cli', '--logs', self.args.home])
+        SubProcess.check_call(['python3', './system76-driver-cli', '--logs', self.args.home])
         GLib.idle_add(self.on_create_complete)
 
     def on_create_complete(self):
