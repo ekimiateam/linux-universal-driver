@@ -15,8 +15,9 @@ It is only used currently on https://ekimia.fr/linuxuniversaldriver/
 |----------|------------------|-------------------|------------------| 
 | Apple    | Apple            | MacBookAir6,2     | macbookair62     |
 | Apple    | Apple            | MacBookAir7,2     | macbookair72     |
-| Apple    | Apple            | MacBookPro11,1    | macbookair111    |
-| Apple    | Apple            | MacBookPro12,1    | macbookair121    |
+| Apple    | Apple            | MacBookPro11,1    | macbookpro111    |
+| Apple    | Apple            | MacBookPro11,2    | macbookpro112    |
+| Apple    | Apple            | MacBookPro12,1    | macbookpro121    |
 | Apple    | Apple            | iMac11,2          | imac112          |
 
 </details>
