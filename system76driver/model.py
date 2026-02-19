@@ -184,6 +184,7 @@ TABLES = {
         'MacBookPro11,1': 'macbookpro111',
         'MacBookPro11,2': 'macbookpro112',
         'MacBookPro12,1': 'macbookpro121',
+        'MacBookPro11,5': 'macbookpro115',
         'iMac11,2' : 'imac112'
 
     },

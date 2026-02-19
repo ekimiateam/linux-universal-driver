@@ -1628,6 +1628,14 @@ PRODUCTS = {
         ],	      
     },
 
+    'macbookpro115': {
+        'name': 'MacBook Pro 15p Mi 2015 DG RADEON',
+        'drivers': [
+            actions.facetimehd_webcam,
+            actions.mbpfan,
+        ],	      
+    },
+
     'imac112': {
         'name': 'iMac mi 2010',
         'drivers': [
