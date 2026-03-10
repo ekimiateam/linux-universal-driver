@@ -1,0 +1,7 @@
+[Unit]
+Description=Disable LID0 Wakeup
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "echo LID0 > /proc/acpi/wakeup"
+[Install]
+WantedBy=multi-user.target

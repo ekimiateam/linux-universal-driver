@@ -1819,4 +1819,20 @@ class disable_ec_wakeup_events(GrubAction):
 
 
 
+class disable_lid0_wakeup(Action):
+       
+
+    def perform(self):
+        command = 'cp ./system76driver/data/disable-lid0-wakeup.service /etc/systemd/system'
+        os.system(command)
+        command = 'systemctl enable disable-lid0-wakeup.service'
+        os.system(command)
+
+    def isneeded(self):
+        return True
+    def get_isneeded(self):
+        return True
+
+    def describe(self):
+        return _('Avoid the laptop screen to wake up the machine')
 
