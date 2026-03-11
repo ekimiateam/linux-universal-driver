@@ -1609,6 +1609,7 @@ PRODUCTS = {
         'drivers': [
             actions.facetimehd_webcam,
             actions.mbpfan,
+            actions.disable_lid0_wakeup,
         ],	      
     },
 
@@ -1627,6 +1628,7 @@ PRODUCTS = {
         'drivers': [
             actions.facetimehd_webcam,
             actions.mbpfan,
+            actions.disable_lid0_wakeup,
         ],	      
     },
 
