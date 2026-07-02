@@ -181,6 +181,7 @@ TABLES = {
         #Apple
         'MacBookAir6,2': 'macbookair62',
         'MacBookAir7,2': 'macbookair72',
+        'MacBookAir9,2': 'macbookpro92',
         'MacBookPro11,1': 'macbookpro111',
         'MacBookPro11,2': 'macbookpro112',
         'MacBookPro12,1': 'macbookpro121',

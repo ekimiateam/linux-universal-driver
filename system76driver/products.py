@@ -1604,6 +1604,15 @@ PRODUCTS = {
         ],	      
     },
 
+    'macbookpro92': {
+        'name': 'MacBook Pro 13p 2012 ',
+        'drivers': [
+            actions.mbpfan,
+            actions.disable_lid0_wakeup,
+        ],	      
+    },
+
+
     'macbookpro111': {
         'name': 'MacBook Pro 13p late 2013',
         'drivers': [
