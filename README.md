@@ -59,6 +59,13 @@ It is only used currently on https://ekimia.fr/linuxuniversaldriver/
 </details>
 
 
+## Drivers versions 
+
+| Project         | Devices                   | Version | Needed for kernel |
+|-----------------|---------------------------|---------|-------------------| 
+| tuxedo-yt6801   | Ekimia/Tongfang/aistone   | 1.0.31  | 7.0               | 
+| tuxedo-drivers  | Ekimia/Clevo              | 4.22.3  |                   | 
+| facetimehd      | Apple MBP/MBA > 2012      | 7.0.1   | 6.17              | 
 
 
 
