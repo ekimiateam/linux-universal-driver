@@ -179,6 +179,7 @@ TABLES = {
         'jaguar1': 'jaguar1',
         
         #Apple
+        'MacBookAir6,1': 'macbookair61',
         'MacBookAir6,2': 'macbookair62',
         'MacBookAir7,2': 'macbookair72',
         'MacBookAir9,2': 'macbookpro92',

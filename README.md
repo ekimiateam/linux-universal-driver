@@ -13,14 +13,15 @@ It is only used currently on https://ekimia.fr/linuxuniversaldriver/
 
 | Factory  | Manufacturer     | Board Name        | Product Name     | Details                              |
 |----------|------------------|-------------------|------------------| --------------------------------     |
-| Apple    | Apple            | MacBookAir6,2     | macbookair62     | MacBook Air Mid 2013                 |   
+| Apple    | Apple            | MacBookAir6,2     | macbookair62     | MacBook Air 13p Mid 2013             |   
+| Apple    | Apple            | MacBookAir6,2     | macbookair62     | MacBook Air 13p Mid 2013             |   
 | Apple    | Apple            | MacBookAir7,2     | macbookair72     | MacBook Air early 2015               |
 | Apple    | Apple            | MacBookPro11,1    | macbookpro111    | MacBook Pro 13p late 2013            |
 | Apple    | Apple            | MacBookPro11,2    | macbookpro112    | MacBook Pro 15p Mi-2014 IG           | 
 | Apple    | Apple            | MacBookPro12,1    | macbookpro121    | MacBook Pro 13p early 2015           |
 | Apple    | Apple            | MacBookPro11,5    | macbookpro115    | MacBook Pro 15p Mi 2015 DG RADEON    |
 | Apple    | Apple            | MacBookPro11,4    | macbookpro114    | MacBook Pro 15p Mi 2015 IG           |
-| Apple    | Apple            | iMac11,2          | imac112          | iMac mi 2010 21.5p                                     |
+| Apple    | Apple            | iMac11,2          | imac112          | iMac mi 2010 21.5p                   |
 
 </details>
 

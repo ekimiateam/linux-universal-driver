@@ -1588,8 +1588,16 @@ PRODUCTS = {
         ],	      
     },
 
+    'macbookair61': {
+        'name': 'MacBook Air 11p Mid 2013',
+        'drivers': [
+            actions.facetimehd_webcam,
+            actions.mbpfan,
+        ],	      
+    },
+
     'macbookair62': {
-        'name': 'MacBook Air Mid 2013',
+        'name': 'MacBook Air 13p Mid 2013',
         'drivers': [
             actions.facetimehd_webcam,
             actions.mbpfan,
