@@ -37,11 +37,11 @@ from .model import determine_model_new
 
 
 log = logging.getLogger()
-CMDLINE_RE = re.compile('^GRUB_CMDLINE_LINUX_DEFAULT="(.*)"$')
+CMDLINE_RE = re.compile('^GRUB_CMDLINE_LINUX_DEFAULT=["\'](.*)["\']\s*$')
 CMDLINE_TEMPLATE = 'GRUB_CMDLINE_LINUX_DEFAULT="{}"'
 
 CMDLINE_CHECK_DEFAULT_RE = re.compile('^GRUB_CMDLINE_LINUX_DEFAULT')
-CMDLINE_ADD_DEFAULT_RE = re.compile('^GRUB_CMDLINE_LINUX="(.*)"$')
+CMDLINE_ADD_DEFAULT_RE = re.compile('^GRUB_CMDLINE_LINUX=["\'](.*)["\']\s*$')
 
 LSPCI_RE = re.compile(r'^(.+) \[(.+)\]$')
 
