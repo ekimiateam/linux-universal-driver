@@ -1,0 +1,51 @@
+name: Build Linux executable
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build x86_64 executable
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install GTK build/runtime dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes python3-venv python3-gi gir1.2-gtk-3.0
+
+      - name: Create build environment
+        run: |
+          python3 -m venv --system-site-packages .venv
+          .venv/bin/python -m pip install --upgrade pip
+          .venv/bin/python -m pip install pyinstaller distro
+
+      - name: Build one-file executable
+        run: |
+          .venv/bin/pyinstaller --noconfirm --clean --onefile \
+            --name linux-universal-driver \
+            --add-data 'system76-driver:.' \
+            --add-data 'system76-driver-cli:.' \
+            --add-data 'system76driver:system76driver' \
+            --hidden-import distro \
+            --hidden-import gi.repository.GLib \
+            --hidden-import gi.repository.Gtk \
+            linux_universal_driver.py
+
+      - name: Smoke-test command-line entry point
+        run: dist/linux-universal-driver --cli --help
+
+      - name: Upload executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-universal-driver-linux-x86_64-${{ github.sha }}
+          path: dist/linux-universal-driver
+          if-no-files-found: error
+          retention-days: 30
