@@ -1685,7 +1685,7 @@ class linux_controlcenter_app(Action):
        
 
     def perform(self):
-        command = 'apt install -y'+" ./system76driver/data/tuxedo-control-center_latest_amd64.deb"
+        command = 'apt update'
         os.system(command)
 
     def isneeded(self):
