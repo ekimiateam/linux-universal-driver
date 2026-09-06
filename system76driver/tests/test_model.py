@@ -72,13 +72,31 @@ class TestConstants(TestCase):
                 if value not in reverse:
                     reverse[value] = set()
                 reverse[value].add((keyword, key))
-        self.assertEqual(set(reverse), set(products.PRODUCTS))
+        # These profiles share board IDs with the Polar/Jaguar models and remain
+        # selectable with --model; DMI cannot distinguish their marketing names.
+        manual_models = {'pulsar1', 'pulsar2', 'pulsar3', 'pulsar4', 'leopard1'}
+        self.assertEqual(set(reverse), set(products.PRODUCTS) - manual_models)
 
         multi = {}
         for (value, occurances) in reverse.items():
             if len(occurances) > 1:
                 multi[value] = occurances
         expected = {
+            'fox1': {('baseboard-product-name', 'PH4TRX1'),
+                     ('system-product-name', 'fox1')},
+            'jaguar1': {('baseboard-product-name', 'NS50MU'),
+                        ('system-product-name', 'jaguar1')},
+            'kevlar1.amd': {('baseboard-product-name', 'GX4HRXL'),
+                           ('baseboard-product-name', 'X4HP4NAL')},
+            'kevlar2': {('baseboard-product-name', 'X4KK4NAL'),
+                       ('baseboard-product-name', 'X4SP4NAL')},
+            'lidar1': {('baseboard-product-name', 'GX5HRXG'),
+                      ('baseboard-product-name', 'X5HP4NAG')},
+            'lidar2': {('baseboard-product-name', 'X5SP4NAG'),
+                      ('baseboard-product-name', 'X5KK4NAG')},
+            'rebel1': {('baseboard-product-name', 'X6RP5551'),
+                      ('baseboard-product-name', 'X6RP5561'),
+                      ('baseboard-product-name', 'X6RP5571')},
             'daru1': set([
                 ('baseboard-product-name', 'Z35FM'),
                 ('baseboard-product-name', 'Z35F'),
@@ -225,7 +243,7 @@ class TestFunctions(TestCase):
             'system-product-name': 'nope',
             'system-version': 'nope',
         }
-        self.assertEqual(model.determine_model(info), 'nonsystem76')
+        self.assertEqual(model.determine_model(info), 'nope')
 
         # No calls should have resulted:
         self.assertEqual(SubProcess.calls, [])

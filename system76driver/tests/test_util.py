@@ -32,6 +32,18 @@ from system76driver import util
 
 
 class TestFunctions(TestCase):
+    def test_logs_do_not_follow_existing_symlinks_or_overwrite_previous_logs(self):
+        tmp = TempDir()
+        victim = tmp.write(b'Keep this file unchanged', 'important.conf')
+        os.symlink(victim, tmp.join('lud-logs.tgz'))
+        first = util.create_logs(tmp.dir, func=None)
+        second = util.create_logs(tmp.dir, func=None)
+        self.assertNotEqual(first, second)
+        self.assertTrue(path.isfile(first))
+        self.assertTrue(path.isfile(second))
+        with open(victim, 'rb') as fp:
+            self.assertEqual(fp.read(), b'Keep this file unchanged')
+
     def test_create_tmp_logs(self):
         SubProcess.reset(mocking=False)
         (tmp, tgz) = util.create_tmp_logs(func=None)
@@ -39,17 +51,20 @@ class TestFunctions(TestCase):
         self.assertTrue(tmp.startswith('/tmp/logs.'))
         self.assertEqual(
             sorted(os.listdir(tmp)),
-            ['system76-logs', 'system76-logs.tgz'],
+            ['lud-logs', 'lud-logs.tgz'],
         )
-        self.assertEqual(tgz, path.join(tmp, 'system76-logs.tgz'))
+        self.assertEqual(tgz, path.join(tmp, 'lud-logs.tgz'))
         self.assertTrue(path.isfile(tgz))
-        self.assertTrue(path.isdir(path.join(tmp, 'system76-logs')))
+        self.assertTrue(path.isdir(path.join(tmp, 'lud-logs')))
         shutil.rmtree(tmp)
 
     def test_create_logs(self):
         SubProcess.reset(mocking=False)
         tmp = TempDir()
         tgz = util.create_logs(tmp.dir, func=None)
-        self.assertEqual(tgz, tmp.join('system76-logs.tgz'))
+        self.assertEqual(path.dirname(tgz), tmp.dir)
+        self.assertTrue(path.basename(tgz).startswith('lud-logs-'))
+        self.assertTrue(tgz.endswith('.tgz'))
+        self.assertEqual(os.stat(tgz).st_mode & 0o777, 0o600)
         self.assertTrue(path.isfile(tgz))
 

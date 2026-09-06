@@ -23,13 +23,13 @@ override_dh_auto_install:
 	set -ex; for python in $(shell py3versions -r); do \
 		$$python setup.py install \
 				--install-layout=deb \
-				--root=$(CURDIR)/debian/system76-driver; \
+				--root=$(CURDIR)/debian/linux-universal-driver; \
 	done
-	mkdir -p $(CURDIR)/debian/system76-driver/var/lib/system76-driver
+	mkdir -p $(CURDIR)/debian/linux-universal-driver/var/lib/system76-driver
 
 override_dh_installgsettings:
 	dh_installgsettings --priority=40
 
 override_dh_installdeb:
 	dh_installdeb
-	cp debian/conffiles debian/system76-driver/DEBIAN/conffiles
+	cp debian/conffiles debian/linux-universal-driver/DEBIAN/conffiles

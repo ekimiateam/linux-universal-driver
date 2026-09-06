@@ -24,11 +24,13 @@ import os
 import time
 import logging
 import distro
+from subprocess import CalledProcessError
 
 import system76driver
 from system76driver.model import determine_model_new
 from system76driver.products import PRODUCTS
 from system76driver.gtk import UI
+from system76driver.mockable import SubProcess
 
 
 parser = argparse.ArgumentParser()
@@ -49,7 +51,13 @@ log = logging.getLogger()
 if args.home is None:
     args.home = os.environ['HOME']
 if args.model is None:
-    args.model = determine_model_new()
+    try:
+        args.model = determine_model_new()
+    except (PermissionError, CalledProcessError):
+        # Keep GTK unprivileged; only the CLI needs access to restricted DMI data.
+        args.model = SubProcess.check_output(
+            system76driver.get_cli_command() + ['--detect-model']
+        ).decode().strip()
 product = PRODUCTS.get(args.model)
 
 log.info('** Process start at monotonic time %r', time.monotonic())

@@ -1,0 +1,148 @@
+--- a/DEBIAN/control
++++ b/DEBIAN/control
+@@ -1,5 +1,5 @@
+ Package: tuxedo-yt6801
+-Version: 1.0.31-8
++Version: 1.0.31-8+ekimia1
+ Architecture: all
+ Maintainer: TUXEDO Computers GmbH <tux@tuxedocomputers.com>
+ Installed-Size: 751
+--- a/DEBIAN/postinst
++++ b/DEBIAN/postinst
+@@ -72,7 +72,7 @@
+ # Automatically added by dh_dkms/3.2.2-1~deb13u1
+ DKMS_NAME=tuxedo-yt6801
+ DKMS_PACKAGE_NAME=$DKMS_NAME-dkms
+-DKMS_VERSION=1.0.31-8
++DKMS_VERSION=1.0.31-8+ekimia1
+ 
+ postinst_found=0
+ 
+--- a/DEBIAN/prerm
++++ b/DEBIAN/prerm
+@@ -2,7 +2,7 @@
+ set -e
+ # Automatically added by dh_dkms/3.2.2-1~deb13u1
+ DKMS_NAME=tuxedo-yt6801
+-DKMS_VERSION=1.0.31-8
++DKMS_VERSION=1.0.31-8+ekimia1
+ 
+ case "$1" in
+     remove|upgrade|deconfigure)
+--- a/usr/src/tuxedo-yt6801-1.0.31-8/dkms.conf
++++ b/usr/src/tuxedo-yt6801-1.0.31-8/dkms.conf
+@@ -1,5 +1,5 @@
+ PACKAGE_NAME="tuxedo-yt6801"
+-PACKAGE_VERSION="1.0.31-8"
++PACKAGE_VERSION="1.0.31-8+ekimia1"
+ AUTOINSTALL="yes"
+ 
+ DEST_MODULE_LOCATION[0]="/kernel/drivers/net/ethernet/motorcomm"
+--- a/usr/src/tuxedo-yt6801-1.0.31-8/fuxi-gmac-ioctl.c
++++ b/usr/src/tuxedo-yt6801-1.0.31-8/fuxi-gmac-ioctl.c
+@@ -18,6 +18,7 @@
+ 
+ #include "fuxi-gmac.h"
+ #include "fuxi-gmac-reg.h"
++#include <linux/capability.h>
+ 
+ static void fxgmac_dbg_tx_pkt(struct fxgmac_pdata *pdata, u8 *pcmd_data)
+ {
+@@ -119,9 +120,9 @@
+     unsigned int total_len = 0;
+     struct sk_buff *rx_skb;
+     struct ext_ioctl_data *pcmd;
+-    fxgmac_test_packet pkt;
++    fxgmac_test_packet pkt = {0};
+     void* addr = 0;
+-    u8 *rx_data = kzalloc(FXGMAC_MAX_DBG_RX_DATA, GFP_KERNEL);
++    u8 *rx_data = kzalloc(FXGMAC_MAX_DBG_BUF_LEN, GFP_KERNEL);
+     if (!rx_data)
+         return;
+     //int i;
+@@ -133,7 +134,9 @@
+         /* get received skb data */
+         rx_skb = pdata->expansion.fxgmac_test_skb_array[pdata->expansion.fxgmac_test_skb_arr_out_index];
+ 
+-        if(rx_skb->len + sizeof(fxgmac_test_packet) + total_len < 64000){
++        if (rx_skb->len < FXGMAC_MAX_DBG_BUF_LEN &&
++            rx_skb->len + sizeof(fxgmac_test_packet) + total_len <=
++            min_t(u32, pcmd->cmd_buf.size_out, FXGMAC_MAX_DBG_BUF_LEN)) {
+             pkt.length = rx_skb->len;
+             pkt.type = 0x80;
+             pkt.buf[0].offset = total_len + sizeof(fxgmac_test_packet);
+@@ -201,14 +204,21 @@
+     struct fxgmac_pdata *pdata = file->private_data;
+     struct fxgmac_hw_ops *hw_ops = &pdata->hw_ops;
+     FXGMAC_PDATA_OF_PLATFORM *ex = &pdata->expansion;
+-    CMD_DATA ex_data;
++    CMD_DATA ex_data = {0};
+     struct ext_ioctl_data pcmd;
+     u8* data = NULL;
+     u8* buf = NULL;
+     int in_total_size, in_data_size, out_total_size;
+     int ioctl_cmd_size = sizeof(struct ext_ioctl_data);
++    size_t payload_size = sizeof(CMD_DATA);
+     u8 mac[ETH_ALEN] = {0};
+     struct sk_buff *tmpskb;
++
++    /* Private network ioctls do not enforce CAP_NET_ADMIN for the driver.
++     * https://github.com/torvalds/linux/blob/v6.17/net/core/dev_ioctl.c
++     */
++    if (!capable(CAP_NET_ADMIN))
++        return -EPERM;
+ 
+     if (!arg) {
+         DPRINTK("[%s] command arg is %lx !\n", __func__, arg);
+@@ -233,6 +243,34 @@
+         goto err;
+     }
+ 
++    /* Validate the full payload before any fixed-size access below.
++     * https://docs.kernel.org/driver-api/ioctl.html
++     */
++    switch (pcmd.cmd_type) {
++    case FXGMAC_DFS_IOCTL_DIAG_BEGIN:
++    case FXGMAC_DFS_IOCTL_DIAG_END:
++    case FXGMAC_DFS_IOCTL_DIAG_RX_PKT:
++    case FXGMAC_DFS_IOCTL_DEVICE_RESET:
++    case FXGMAC_EFUSE_WRITE_OOB:
++    case FXGMAC_EFUSE_LOAD:
++        payload_size = 0;
++        break;
++    case FXGMAC_DFS_IOCTL_DIAG_TX_PKT:
++        payload_size = sizeof(fxgmac_test_packet);
++        break;
++    case FXGMAC_EFUSE_LED_TEST:
++    case FXGMAC_EFUSE_UPDATE_LED_CFG:
++        payload_size = sizeof(struct led_setting);
++        break;
++    case FXGMAC_GET_MAC_DATA:
++    case FXGMAC_SET_MAC_DATA:
++        payload_size = ETH_ALEN;
++        break;
++    }
++    if (pcmd.cmd_buf.size_in < ioctl_cmd_size + payload_size ||
++        pcmd.cmd_buf.size_in > FXGMAC_MAX_DBG_BUF_LEN)
++        return -EINVAL;
++
+     in_total_size = pcmd.cmd_buf.size_in;
+     in_data_size = in_total_size - ioctl_cmd_size;
+     out_total_size = pcmd.cmd_buf.size_out;
+@@ -246,6 +284,16 @@
+         goto err;
+     }
+     data = buf + ioctl_cmd_size;
++
++    /* Use the validated header, not a second user-space copy that can change. */
++    memcpy(buf, &pcmd, sizeof(pcmd));
++    if (pcmd.cmd_type == FXGMAC_DFS_IOCTL_DIAG_TX_PKT) {
++        pfxgmac_test_packet pkt = (pfxgmac_test_packet)data;
++
++        if (pkt->length < ETH_HLEN ||
++            pkt->length > in_data_size - sizeof(*pkt))
++            goto err;
++    }
+ 
+     if(arg != 0) {
+         switch(pcmd.cmd_type) {

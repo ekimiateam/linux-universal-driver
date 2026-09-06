@@ -28,7 +28,7 @@ import tempfile
 import distro
 import subprocess
 
-from .model import *
+from .model import determine_model
 
 def dump_command(base, name, args):
     fp = open(path.join(base, name), 'xt')
@@ -98,10 +98,17 @@ def create_tmp_logs(func=dump_logs):
 
 def create_logs(homedir, func=dump_logs):
     (tmp, src) = create_tmp_logs(func)
-    assert path.isdir(homedir)
-    dst = path.join(homedir, path.basename(src))
-    shutil.copy(src, dst)
-    shutil.rmtree(tmp)
+    try:
+        # An exclusive, private file avoids following a user-controlled symlink.
+        # https://docs.python.org/3/library/tempfile.html#tempfile.mkstemp
+        fd, dst = tempfile.mkstemp(prefix='lud-logs-', suffix='.tgz', dir=homedir)
+        with os.fdopen(fd, 'wb') as output, open(src, 'rb') as source:
+            shutil.copyfileobj(source, output)
+            if os.getuid() == 0:
+                owner = os.stat(homedir)
+                os.fchown(output.fileno(), owner.st_uid, owner.st_gid)
+    finally:
+        shutil.rmtree(tmp)
     return dst
 
 

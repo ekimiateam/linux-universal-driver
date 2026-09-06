@@ -12,6 +12,7 @@ Build-Depends: debhelper (>= 9.20160709),
     python3-evdev,
     python3-gi,
     python3-distro,
+    python3-setuptools,
     python3-systemd,
     xbacklight
 Standards-Version: 4.5.0
@@ -19,6 +20,9 @@ X-Python3-Version: >= 3.6
 Homepage: https://github.com/ekimiateam/linux-universal-driver
 
 Package: linux-universal-driver
+Provides: system76-driver (= ${binary:Version})
+Conflicts: system76-driver
+Replaces: system76-driver
 Architecture: amd64 arm64
 Suggests: gnome-color-manager
 Depends: ${python3:Depends}, ${misc:Depends},
@@ -28,6 +32,7 @@ Depends: ${python3:Depends}, ${misc:Depends},
     gir1.2-notify-0.7,
     linux-system76 [amd64],
     pm-utils,
+    pkexec | policykit-1,
     python3-dbus,
     python3-evdev,
     python3-gi,
@@ -55,7 +60,7 @@ Package: system76-driver-nvidia
 Architecture: amd64 arm64
 Depends: ${misc:Depends},
     nvidia-driver-550 | nvidia-driver-470,
-    system76-driver (>= ${binary:Version}),
+    linux-universal-driver (>= ${binary:Version}),
     ubuntu-drivers-common,
 Recommends: amd-ppt-bin [amd64]
 Description: Latest nvidia driver for System76 computers
