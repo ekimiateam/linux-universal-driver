@@ -22,6 +22,8 @@ Universal driver for System76 computers
 """
 
 from os import path
+import os
+import sys
 import logging
 
 
@@ -43,6 +45,13 @@ VALID_SYS_VENDOR = (
 
 def get_datafile(name):
     return path.join(datadir, name)
+
+
+def get_cli_command():
+    """Locate the CLI beside the launcher, in the source tree or installation."""
+    script = path.join(path.dirname(path.realpath(sys.argv[0])),
+                       'system76-driver-cli')
+    return ([script] if os.getuid() == 0 else ['pkexec', script])
 
 
 def read_dmi_id(key, sysdir='/sys'):

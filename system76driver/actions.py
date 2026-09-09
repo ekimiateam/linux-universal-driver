@@ -30,6 +30,7 @@ import json
 from base64 import b32encode
 import datetime
 import logging
+import distro
 
 from . import get_datafile
 from .mockable import SubProcess
@@ -242,7 +243,7 @@ class ActionRunner:
             if action.isneeded:
                 self.needed.append(action)
 
-    def run_iter(self):
+    def run_iter(self, dry=False):
         for action in self.actions:
             name = action.__class__.__name__
             log.info('%s: %s', name, action.description)
@@ -250,10 +251,14 @@ class ActionRunner:
                 assert action in self.needed
                 log.info('Running %r', name)
                 yield action.description
-                action.perform()
+                if not dry:
+                    action.perform()
             else:
                 assert action not in self.needed
                 log.info('Skipping %r as it was already applied', name)
+
+        if dry:
+            return
 
         if any(action.update_grub for action in self.needed):
             if path.isfile(path.join('/', 'usr', 'bin', 'kernelstub')):
@@ -1656,8 +1661,8 @@ class rgb_keyboard_driver(Action):
        
 
     def perform(self):
-        command = 'apt install -y'+" ./system76driver/data/tuxedo-drivers_latest_all.deb"
-        os.system(command)
+        SubProcess.check_call(['apt-get', 'install', '-y',
+                               get_datafile('tuxedo-drivers_latest_all.deb')])
 
     def isneeded(self):
         return True
@@ -1685,8 +1690,8 @@ class linux_controlcenter_app(Action):
        
 
     def perform(self):
-        command = 'apt install -y'+" ./system76driver/data/tuxedo-control-center_latest_amd64.deb"
-        os.system(command)
+        SubProcess.check_call(['apt-get', 'install', '-y',
+                               get_datafile('tuxedo-control-center_latest_amd64.deb')])
 
     def isneeded(self):
         return True
@@ -1702,8 +1707,8 @@ class yt6801_driver(Action):
        
 
     def perform(self):
-        command = 'apt install -y'+" ./system76driver/data/tuxedo-yt6801_latest.deb"
-        os.system(command)
+        SubProcess.check_call(['apt-get', 'install', '-y',
+                               get_datafile('tuxedo-yt6801_latest.deb')])
 
     def isneeded(self):
         return True
@@ -1718,8 +1723,8 @@ class isight_webcam(Action):
        
 
     def perform(self):
-        command = 'cp ./system76driver/data/isight.fw /lib/firmware/isight.fw'
-        os.system(command)
+        SubProcess.check_call(['cp', get_datafile('isight.fw'),
+                               '/lib/firmware/isight.fw'])
 
     def isneeded(self):
         return True
@@ -1735,10 +1740,9 @@ class facetimehd_webcam(Action):
        
 
     def perform(self):
-        command = 'apt install -y ./system76driver/data/facetimehd-firmware_0.1-1.deb'
-        os.system(command)
-        command = 'apt install -y ./system76driver/data/facetimehd-dkms_latest_amd64.deb'
-        os.system(command)
+        SubProcess.check_call(['apt-get', 'install', '-y',
+                               get_datafile('facetimehd-firmware_0.1-1.deb'),
+                               get_datafile('facetimehd-dkms_latest_amd64.deb')])
 
     def isneeded(self):
         return True
@@ -1754,8 +1758,7 @@ class mbpfan(Action):
        
 
     def perform(self):
-        command = 'apt install mbpfan'
-        os.system(command)
+        SubProcess.check_call(['apt-get', 'install', '-y', 'mbpfan'])
 
     def isneeded(self):
         return True
@@ -1770,10 +1773,13 @@ class enableIPU3webcams(Action):
        
 
     def perform(self):
-        command = 'zstd -d -f /lib/firmware/intel/ipu3-fw.bin.zst'
-        os.system(command)
-        command = 'apt install -y gstreamer1.0-libcamera pipewire-libcamera libcamera0.2 libspa-0.2-libcamera libcamera-v4l2  libcamera-tools  libcamera-ipa libcamera-v4l2'
-        os.system(command)
+        SubProcess.check_call(['zstd', '-d', '-f',
+                               '/lib/firmware/intel/ipu3-fw.bin.zst'])
+        SubProcess.check_call([
+            'apt-get', 'install', '-y', 'gstreamer1.0-libcamera',
+            'pipewire-libcamera', 'libcamera0.2', 'libspa-0.2-libcamera',
+            'libcamera-v4l2', 'libcamera-tools', 'libcamera-ipa',
+        ])
 
     def isneeded(self):
         return True
@@ -1789,12 +1795,38 @@ class enablesurfacekernel(Action):
        
 
     def perform(self):
-        command = 'wget -qO - https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc | gpg --dearmor | dd of=/etc/apt/trusted.gpg.d/linux-surface.gpg'
-        os.system(command)
-        command = 'echo "deb [arch=amd64] https://pkg.surfacelinux.com/debian release main" | tee /etc/apt/sources.list.d/linux-surface.list'
-        os.system(command)
-        command = 'apt install -y linux-image-surface linux-headers-surface libwacom-surface iptsd'
-        os.system(command)
+        key = SubProcess.check_output([
+            'wget', '-qO', '-',
+            'https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc',
+        ])
+        key = SubProcess.check_output(['gpg', '--dearmor'], input=key)
+        with open('/etc/apt/trusted.gpg.d/linux-surface.gpg', 'wb') as fp:
+            fp.write(key)
+        atomic_write('/etc/apt/sources.list.d/linux-surface.list',
+                     'deb [arch=amd64] https://pkg.surfacelinux.com/debian release main\n')
+        SubProcess.check_call(['apt-get', 'update'])
+
+        packages = ['linux-image-surface', 'linux-headers-surface', 'iptsd']
+        # libwacom-surface can remove GNOME on Ubuntu 26.04 and conflicts with
+        # Debian Testing/Sid. Keep the distribution's libwacom on those releases.
+        # https://github.com/linux-surface/linux-surface/issues/2076
+        release = distro.major_version()
+        skip_wacom = (
+            distro.id() == 'ubuntu' and (not release.isdecimal() or int(release) >= 26)
+        ) or (
+            distro.id() == 'debian' and
+            distro.codename() not in ('bullseye', 'bookworm', 'trixie')
+        )
+        if not skip_wacom:
+            packages.append('libwacom-surface')
+        SubProcess.check_call(['apt-get', 'install', '-y', '--no-remove'] + packages)
+
+        # Secure Boot requires this signing key and enrollment at the next boot.
+        # https://github.com/linux-surface/linux-surface/wiki/Installation-and-Setup#debian--ubuntu
+        SubProcess.check_call(['apt-get', 'install', '-y', '--no-remove',
+                               'linux-surface-secureboot-mok'])
+        log.warning('If Secure Boot is enabled, enroll the Surface key in MokManager '
+                    'at the next boot (password: surface).')
 
     def isneeded(self):
         return True
@@ -1823,10 +1855,9 @@ class disable_lid0_wakeup(Action):
        
 
     def perform(self):
-        command = 'cp ./system76driver/data/disable-lid0-wakeup.service /etc/systemd/system'
-        os.system(command)
-        command = 'systemctl enable disable-lid0-wakeup.service'
-        os.system(command)
+        SubProcess.check_call(['cp', get_datafile('disable-lid0-wakeup.service'),
+                               '/etc/systemd/system'])
+        SubProcess.check_call(['systemctl', 'enable', 'disable-lid0-wakeup.service'])
 
     def isneeded(self):
         return True
@@ -1835,4 +1866,3 @@ class disable_lid0_wakeup(Action):
 
     def describe(self):
         return _('Avoid the laptop screen to wake up the machine')
-

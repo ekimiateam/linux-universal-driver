@@ -26,10 +26,10 @@ from os import path
 import sys
 import logging
 
-import system76driver
 from system76driver.products import PRODUCTS
 from system76driver.actions import ActionRunner
 from system76driver.util import create_logs
+from system76driver.model import determine_model_new
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--strict', action='store_true', default=False,
@@ -37,7 +37,13 @@ parser.add_argument('--strict', action='store_true', default=False,
 )
 parser.add_argument('--model', help='force model rather than detecting it')
 parser.add_argument('--logs', help='Store logs to specified home directory')
+parser.add_argument('--detect-model', action='store_true',
+    help='Print the detected model without applying changes')
+parser.add_argument('--dry', action='store_true',
+    help='List required actions without applying changes')
 args = parser.parse_args()
+if args.dry and args.logs:
+    parser.error('--dry cannot be combined with --logs')
 exitcode = (2 if args.strict else 0)
 
 # Because system76-driver-cli will be called automatically from the postinst
@@ -51,32 +57,32 @@ log = logging.getLogger()
 # This is a hack so that the driver doesn't get run in the VM when mastering
 # and maintaining the golden images:
 MARKER = '/var/cache/system76-pre-master.marker'
-if path.exists(MARKER):
+if path.exists(MARKER) and not (args.logs or args.detect_model):
     log.warning('Pre-master marker exists: %r', MARKER)
     sys.exit(0)
 
 
-product_version = args.model or system76driver.get_product_version()
-try:
-    product = PRODUCTS[product_version]
-    log.info('product_version: %r', product_version)
-except KeyError:
-    log.warning('invalid product_version: %r', product_version)
-#    sys.exit(exitcode)
-
 if os.getuid() != 0:
     log.error('must be run as root')
-    sys.exit(exitcode)
+    sys.exit(1)
 
 try:
-    if args.logs is not None:
+    if args.detect_model:
+        print(determine_model_new())
+    elif args.logs is not None:
         tgz = create_logs(args.logs)
         log.info('logs stored in %s', tgz)
     else:
+        product_version = args.model or determine_model_new()
+        product = PRODUCTS.get(product_version)
+        if product is None:
+            log.warning('invalid product_version: %r', product_version)
+            sys.exit(exitcode)
+        log.info('product_version: %r', product_version)
         action_runner = ActionRunner(product['drivers'])
-        for msg in action_runner.run_iter():
+        for msg in action_runner.run_iter(dry=args.dry):
             log.info('* %s', msg)
 except Exception:
     log.exception('Error running actions:')
-    sys.exit(exitcode)
+    sys.exit(1)
 

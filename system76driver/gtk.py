@@ -23,16 +23,16 @@ Gtk UI.
 
 import distro
 import threading
+from subprocess import CalledProcessError
 from gettext import gettext as _
 
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import GLib, Gtk
 
-from . import __version__, get_datafile
+from . import __version__, get_datafile, get_cli_command
 from .mockable import SubProcess
-from .util import *
-from .actions import ActionRunner
+from .actions import ActionRunner, enablesurfacekernel
 
 
 GLib.threads_init()
@@ -127,15 +127,33 @@ class UI:
         Gtk.main()
 
     def worker_thread(self):
-        SubProcess.check_call(['python3', './system76-driver-cli', '--model', self.model])
+        command = get_cli_command() + ['--strict', '--model', self.model]
+        if self.args.dry:
+            command.append('--dry')
+        try:
+            SubProcess.check_call(command)
+        except (OSError, CalledProcessError) as error:
+            GLib.idle_add(self.on_worker_failed, str(error))
+            return
         GLib.idle_add(self.on_worker_complete)
+
+    def on_worker_failed(self, error):
+        self.thread.join()
+        self.thread = None
+        self.set_notify('gtk-dialog-error', _('Operation failed: {}').format(error))
+        self.set_sensitive(True)
 
     def on_worker_complete(self):
         self.thread.join()
         self.thread = None
-        self.set_notify('gtk-apply',
-            'Installation is complete! Please reboot for changes to take effect.'
+        message = (
+            _('Dry run complete. No changes were applied.') if self.args.dry else
+            _('Installation is complete! Please reboot for changes to take effect.')
         )
+        if not self.args.dry and enablesurfacekernel in self.product['drivers']:
+            message += _(' If Secure Boot is enabled, enroll the Surface key in '
+                         'MokManager at the next boot (password: surface).')
+        self.set_notify('gtk-apply', message)
         self.set_sensitive(True)
 
     def start_worker(self):
@@ -160,16 +178,19 @@ class UI:
         self.start_worker()
 
     def create_worker(self):
-        SubProcess.check_call(['python3', './system76-driver-cli', '--logs', self.args.home])
+        try:
+            SubProcess.check_call(get_cli_command() + ['--logs', self.args.home])
+        except (OSError, CalledProcessError) as error:
+            GLib.idle_add(self.on_worker_failed, str(error))
+            return
         GLib.idle_add(self.on_create_complete)
 
     def on_create_complete(self):
         self.thread.join()
         self.thread = None
         self.set_sensitive(True)
-        send_logs()
         self.set_notify('gtk-ok',
-            _('A log file  was created .\n and sent to your manufacturer')
+            _('Log files were saved in {}.').format(self.args.home)
         )
 
     def onCreateClicked(self, button):

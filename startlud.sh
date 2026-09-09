@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo python3 system76-driver
+exec python3 "$(dirname "$(readlink -f "$0")")/system76-driver" "$@"

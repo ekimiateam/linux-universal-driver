@@ -1,0 +1,140 @@
+--- a/DEBIAN/control
++++ b/DEBIAN/control
+@@ -1,5 +1,5 @@
+ Package: tuxedo-drivers
+-Version: 4.11.2
++Version: 4.11.2+ekimia1
+ Architecture: all
+ Maintainer: TUXEDO Computers GmbH <tux@tuxedocomputers.com>
+ Installed-Size: 468
+--- a/DEBIAN/postinst
++++ b/DEBIAN/postinst
+@@ -8,7 +8,7 @@
+ 
+ DKMS_NAME=tuxedo-drivers
+ DKMS_PACKAGE_NAME=$DKMS_NAME-dkms
+-DKMS_VERSION=4.11.2
++DKMS_VERSION=4.11.2+ekimia1
+ 
+ postinst_found=0
+ 
+--- a/DEBIAN/prerm
++++ b/DEBIAN/prerm
+@@ -47,7 +47,7 @@
+ 
+ # Automatically added by dh_dkms/UNDECLARED
+ DKMS_NAME=tuxedo-drivers
+-DKMS_VERSION=4.11.2
++DKMS_VERSION=4.11.2+ekimia1
+ 
+ case "$1" in
+     remove|upgrade|deconfigure)
+--- a/usr/src/tuxedo-drivers-4.11.2/dkms.conf
++++ b/usr/src/tuxedo-drivers-4.11.2/dkms.conf
+@@ -1,5 +1,5 @@
+ PACKAGE_NAME="tuxedo-drivers"
+-PACKAGE_VERSION="4.11.2"
++PACKAGE_VERSION="4.11.2+ekimia1"
+ AUTOINSTALL="yes"
+ 
+ DEST_MODULE_LOCATION[0]="/kernel/lib/"
+--- a/usr/src/tuxedo-drivers-4.11.2/tuxedo_nb05/tuxedo_nb05_power_profiles.c
++++ b/usr/src/tuxedo-drivers-4.11.2/tuxedo_nb05/tuxedo_nb05_power_profiles.c
+@@ -37,6 +37,8 @@
+ #define NB05_WMI_METHOD_BA_GUID	"99D89064-8D50-42BB-BEA9-155B2E5D0FCD"
+ 
+ static DEFINE_MUTEX(nb05_wmi_aa_access_lock);
++static DEFINE_SPINLOCK(profile_work_lock);
++static bool profile_active;
+ 
+ struct driver_data_t {
+ 	struct platform_device *pdev;
+@@ -60,8 +62,14 @@
+ 
+ static void profile_changed_timer_bump(void)
+ {
+-	profile_changed_by_driver_flag = true;
+-	mod_timer(&profile_changed_timer, jiffies + msecs_to_jiffies(300));
++	unsigned long flags;
++
++	spin_lock_irqsave(&profile_work_lock, flags);
++	if (profile_active) {
++		profile_changed_by_driver_flag = true;
++		mod_timer(&profile_changed_timer, jiffies + msecs_to_jiffies(300));
++	}
++	spin_unlock_irqrestore(&profile_work_lock, flags);
+ }
+ 
+ static void profile_changed_timeout(struct timer_list *t)
+@@ -248,7 +256,12 @@
+ 
+ void rewrite_last_profile(void)
+ {
+-	schedule_work(&nb05_rewrite_profile_work);
++	unsigned long flags;
++
++	spin_lock_irqsave(&profile_work_lock, flags);
++	if (profile_active)
++		schedule_work(&nb05_rewrite_profile_work);
++	spin_unlock_irqrestore(&profile_work_lock, flags);
+ }
+ EXPORT_SYMBOL(rewrite_last_profile);
+ 
+@@ -347,6 +360,11 @@
+ 		return err;
+ 	}
+ 
++	/* A previous unbind may have shut the timer down. */
++	timer_setup(&profile_changed_timer, profile_changed_timeout, 0);
++	spin_lock_irq(&profile_work_lock);
++	profile_active = true;
++	spin_unlock_irq(&profile_work_lock);
+ 	return 0;
+ }
+ 
+@@ -356,10 +374,26 @@
+ static void tuxedo_nb05_power_profiles_remove(struct wmi_device *wdev)
+ #endif
+ {
++	struct driver_data_t *driver_data = dev_get_drvdata(&wdev->dev);
++	unsigned long flags;
++
+ 	pr_debug("driver remove\n");
+-	del_timer(&profile_changed_timer);
+-	struct driver_data_t *driver_data = dev_get_drvdata(&wdev->dev);
++	/* Stop new work before draining callbacks that use the device data.
++	 * https://docs.kernel.org/core-api/workqueue.html#c.cancel_work_sync
++	 */
++	spin_lock_irqsave(&profile_work_lock, flags);
++	profile_active = false;
++	spin_unlock_irqrestore(&profile_work_lock, flags);
+ 	sysfs_remove_group(&driver_data->pdev->dev.kobj, &platform_profile_attr_group);
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 2, 0)
++	/* del_timer() was removed in 6.15; shutdown also prevents rearming.
++	 * https://docs.kernel.org/driver-api/basics.html#c.timer_shutdown_sync
++	 */
++	timer_shutdown_sync(&profile_changed_timer);
++#else
++	del_timer_sync(&profile_changed_timer);
++#endif
++	cancel_work_sync(&nb05_rewrite_profile_work);
+ 	platform_device_unregister(driver_data->pdev);
+ 
+ #if LINUX_VERSION_CODE < KERNEL_VERSION(5, 13, 0)
+--- a/usr/src/tuxedo-drivers-4.11.2/tuxedo_compatibility_check/tuxedo_compatibility_check.c
++++ b/usr/src/tuxedo-drivers-4.11.2/tuxedo_compatibility_check/tuxedo_compatibility_check.c
+@@ -157,7 +157,14 @@
+ 	X86_MATCH_VFM(INTEL_ATOM_SILVERMONT_D, NULL),
+ 	X86_MATCH_VFM(INTEL_ATOM_SILVERMONT_MID, NULL),
+ 	X86_MATCH_VFM(INTEL_ATOM_AIRMONT, NULL),
++	/* Linux 6.15 renamed model 0x5A; keep the same CPU match on both APIs.
++	 * https://github.com/torvalds/linux/blob/v6.15/arch/x86/include/asm/intel-family.h
++	 */
++#ifdef INTEL_ATOM_SILVERMONT_MID2
++	X86_MATCH_VFM(INTEL_ATOM_SILVERMONT_MID2, NULL),
++#else
+ 	X86_MATCH_VFM(INTEL_ATOM_AIRMONT_MID, NULL),
++#endif
+ 	X86_MATCH_VFM(INTEL_ATOM_AIRMONT_NP, NULL),
+ 	X86_MATCH_VFM(INTEL_ATOM_GOLDMONT, NULL),
+ 	X86_MATCH_VFM(INTEL_ATOM_GOLDMONT_D, NULL),
