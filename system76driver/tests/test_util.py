@@ -39,17 +39,17 @@ class TestFunctions(TestCase):
         self.assertTrue(tmp.startswith('/tmp/logs.'))
         self.assertEqual(
             sorted(os.listdir(tmp)),
-            ['system76-logs', 'system76-logs.tgz'],
+            ['lud-logs', 'lud-logs.tgz'],
         )
-        self.assertEqual(tgz, path.join(tmp, 'system76-logs.tgz'))
+        self.assertEqual(tgz, path.join(tmp, 'lud-logs.tgz'))
         self.assertTrue(path.isfile(tgz))
-        self.assertTrue(path.isdir(path.join(tmp, 'system76-logs')))
+        self.assertTrue(path.isdir(path.join(tmp, 'lud-logs')))
         shutil.rmtree(tmp)
 
     def test_create_logs(self):
         SubProcess.reset(mocking=False)
         tmp = TempDir()
         tgz = util.create_logs(tmp.dir, func=None)
-        self.assertEqual(tgz, tmp.join('system76-logs.tgz'))
+        self.assertEqual(tgz, tmp.join('lud-logs.tgz'))
         self.assertTrue(path.isfile(tgz))
 
