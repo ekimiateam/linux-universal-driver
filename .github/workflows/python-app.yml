@@ -56,15 +56,26 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.10"
-    - name: Install dependencies
+    - name: Install system and Python dependencies
       run: |
-        python -m pip install --upgrade pip
+        # system76driver imports dbus/gi/distro/evdev, which are the same
+        # Build-Depends debian/control already declares. Installing them as
+        # system packages (like the real `debian/rules` build does, via
+        # `py3versions -r`) avoids rebuilding dbus-python/PyGObject from
+        # source, which pip can't do here without extra -dev packages.
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends \
+          gir1.2-gtk-3.0 python3-dbus python3-distro python3-evdev python3-gi \
+          python3-venv xvfb
+        # --system-site-packages so the venv can still see the apt-installed
+        # bindings above; the venv itself just keeps flake8/pytest off the
+        # system Python. Lives outside the checkout so `flake8 .` below
+        # doesn't recurse into pip's vendored packages.
+        python3 -m venv --system-site-packages "$RUNNER_TEMP/venv"
+        source "$RUNNER_TEMP/venv/bin/activate"
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        echo "$RUNNER_TEMP/venv/bin" >> "$GITHUB_PATH"
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -73,4 +84,6 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest
+        # GTK tests build real widgets, so they need a display; xvfb-run
+        # gives them one the same way PR #24 validated its own GTK tests.
+        xvfb-run -a pytest
