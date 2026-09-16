@@ -13,21 +13,69 @@ permissions:
   contents: read
 
 jobs:
+  dco:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Check for DCO sign-off (advisory)
+      shell: bash
+      continue-on-error: true
+      env:
+        BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      run: |
+        set -Eeuo pipefail
+        zero_sha="0000000000000000000000000000000000000000"
+        if [ -z "$BASE_SHA" ] || [ "$BASE_SHA" = "$zero_sha" ]; then
+          echo "No prior commit to compare against; skipping DCO check for this event."
+          exit 0
+        fi
+        # Advisory: reports, does not gate. A human reviewer judges each pull request.
+        unsigned=0
+        while IFS= read -r commit; do
+          # Presence check only: does not verify the trailer's name/email matches the
+          # commit author, the way stricter DCO bots do.
+          if ! git log -1 --format=%B "$commit" | grep -qE '^Signed-off-by: .+ <.+>$'; then
+            subject="$(git log -1 --format=%s "$commit")"
+            printf '::warning::Commit %s is missing a Signed-off-by trailer: %s\n' \
+              "$commit" "${subject//%/%25}"
+            unsigned=1
+          fi
+        done < <(git rev-list --no-merges "$BASE_SHA..$HEAD_SHA")
+        if [ "$unsigned" -ne 0 ]; then
+          echo "One or more commits are missing a DCO sign-off (see warnings above)."
+        fi
+
   build:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.10"
-    - name: Install dependencies
+    - name: Install system and Python dependencies
       run: |
-        python -m pip install --upgrade pip
+        # system76driver imports dbus/gi/distro/evdev, which are the same
+        # Build-Depends debian/control already declares. Installing them as
+        # system packages (like the real `debian/rules` build does, via
+        # `py3versions -r`) avoids rebuilding dbus-python/PyGObject from
+        # source, which pip can't do here without extra -dev packages.
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends \
+          gir1.2-gtk-3.0 python3-dbus python3-distro python3-evdev python3-gi \
+          python3-venv xvfb
+        # --system-site-packages so the venv can still see the apt-installed
+        # bindings above; the venv itself just keeps flake8/pytest off the
+        # system Python. Lives outside the checkout so `flake8 .` below
+        # doesn't recurse into pip's vendored packages.
+        python3 -m venv --system-site-packages "$RUNNER_TEMP/venv"
+        source "$RUNNER_TEMP/venv/bin/activate"
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        echo "$RUNNER_TEMP/venv/bin" >> "$GITHUB_PATH"
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -36,4 +84,6 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest
+        # GTK tests build real widgets, so they need a display; xvfb-run
+        # gives them one the same way PR #24 validated its own GTK tests.
+        xvfb-run -a pytest
