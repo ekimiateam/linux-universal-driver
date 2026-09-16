@@ -13,8 +13,8 @@ It is only used currently on https://ekimia.fr/linuxuniversaldriver/
 
 | Factory  | Manufacturer     | Board Name        | Product Name     | Details                              |
 |----------|------------------|-------------------|------------------| --------------------------------     |
-| Apple    | Apple            | MacBookAir6,1     | macbookair61     | MacBook Air 11p Mid 2013             |   
-| Apple    | Apple            | MacBookAir6,2     | macbookair62     | MacBook Air 13p Mid 2013             |   
+| Apple    | Apple            | MacBookAir6,1     | macbookair61     | MacBook Air 11p Mi-2013 ea-2014      |   
+| Apple    | Apple            | MacBookAir6,2     | macbookair62     | MacBook Air 13p Mi-2013 ea-2014      |   
 | Apple    | Apple            | MacBookAir7,2     | macbookair72     | MacBook Air early 2015               |
 | Apple    | Apple            | MacBookPro11,1    | macbookpro111    | MacBook Pro 13p late 2013            |
 | Apple    | Apple            | MacBookPro11,2    | macbookpro112    | MacBook Pro 15p Mi-2014 IG           | 
