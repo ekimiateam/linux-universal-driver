@@ -32,6 +32,7 @@ import datetime
 import logging
 
 from . import get_datafile
+from .capabilities import boot_backend, has_command
 from .mockable import SubProcess
 from .model import determine_model_new
 
@@ -256,12 +257,16 @@ class ActionRunner:
                 log.info('Skipping %r as it was already applied', name)
 
         if any(action.update_grub for action in self.needed):
-            if path.isfile(path.join('/', 'usr', 'bin', 'kernelstub')):
+            backend = boot_backend()
+            if backend == 'kernelstub':
                 yield _('Running `kernelstub`')
                 update_kernelstub()
-            else:
+            elif backend == 'grub':
                 yield _('Running `update-grub`')
                 update_grub()
+            else:
+                raise RuntimeError(
+                    'Unsupported boot backend: neither kernelstub nor update-grub is available')
 
         if any(action.update_initramfs for action in self.needed):
             yield _('Running `update-initramfs`')
@@ -343,12 +348,13 @@ class GrubAction(Action):
     insert_default = False
 
     def __init__(self, etcdir='/etc'):
-        if path.isfile(path.join('/', 'usr', 'bin', 'kernelstub')):
-            self.mode = 'kernelstub'
+        self.mode = boot_backend() or 'unsupported'
+        if self.mode == 'kernelstub':
             self.filename = path.join(etcdir, 'kernelstub', 'configuration')
-        else:
-            self.mode = 'grub'
+        elif self.mode == 'grub':
             self.filename = path.join(etcdir, 'default', 'grub')
+        else:
+            self.filename = None
 
     def read(self):
         return open(self.filename, 'r').read()
@@ -424,6 +430,9 @@ class GrubAction(Action):
         return not params.issuperset(self.add)
 
     def get_isneeded(self):
+        if self.mode == 'unsupported':
+            raise RuntimeError(
+                'Unsupported boot backend: neither kernelstub nor update-grub is available')
         if self.mode == 'kernelstub':
             current = self.get_current_kernel_options()
             params = set(current)
@@ -974,29 +983,6 @@ class remove_switch_internal_speakers(Action):
         return _('Remove configuration to switch left/right speaker channels.')
 
 
-def get_distribution():
-    try:
-        cmd = ['lsb_release', '-a']
-        content = SubProcess.check_output(cmd).decode('utf-8')
-        for line in content.splitlines():
-            pair = line.strip('\n').split(':', 1)
-            if len(pair) != 2:
-                continue
-            key = pair[0]
-            value = pair[1].lstrip()
-            if key == 'Description':
-                print(value)
-                if value.startswith('Ubuntu'):
-                    return 'Ubuntu'
-                elif value.startswith('Pop!_OS'):
-                    return 'Pop'
-                else:
-                    return 'Unknown'
-    except:
-        pass
-    return ''
-
-
 ENERGYSTAR_GSETTINGS_OVERRIDE = """[org.gnome.settings-daemon.plugins.power]
 sleep-inactive-ac-type='suspend'
 sleep-inactive-ac-timeout=1800
@@ -1019,7 +1005,7 @@ class energystar_gsettings_override(FileAction):
         SubProcess.check_call(cmd_compile_schemas)
 
     def get_isneeded(self):
-        if get_distribution() != 'Ubuntu':
+        if not has_command('glib-compile-schemas'):
             return False
         if self.read() != self.content:
             return True
@@ -1078,7 +1064,7 @@ class energystar_wakeonlan(FileAction):
             return None
 
     def get_isneeded(self):
-        if get_distribution() != 'Ubuntu':
+        if not has_command('ethtool'):
             return False
         return self.read1() != self.content1 or self.read2() != self.content2
 
@@ -1111,6 +1097,8 @@ class touchpad_use_areas(FileAction):
         SubProcess.check_call(cmd_compile_schemas)
 
     def get_isneeded(self):
+        if not has_command('glib-compile-schemas'):
+            return False
         if self.read() != self.content:
             return True
         st = os.stat(self.filename)
@@ -1353,6 +1341,8 @@ class hidpi_scaling(FileAction):
         return False
 
     def get_isneeded(self):
+        if not has_command('glib-compile-schemas'):
+            return False
         needed = False
         if self.read() != self.content:
             needed = True

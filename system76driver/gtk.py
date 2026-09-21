@@ -91,7 +91,16 @@ class UI:
 
     def prepare_action_runner(self):
         self.enabled['driverCreate'] = True
-        self.action_runner = ActionRunner(self.product['drivers'])
+        try:
+            self.action_runner = ActionRunner(self.product['drivers'])
+        except Exception as error:
+            # Same pattern as the "Undefined Product" notice above: surface
+            # it in the UI instead of leaving GLib to print an unhandled
+            # exception from this idle callback and otherwise do nothing.
+            self.set_notify('gtk-dialog-error', str(error))
+            self.details.set_text(str(error))
+            self.set_sensitive(True)
+            return
         if not self.action_runner.actions:
             msg = _('All of the drivers for this system are provided by Ubuntu.')
             self.set_notify('gtk-ok', msg)

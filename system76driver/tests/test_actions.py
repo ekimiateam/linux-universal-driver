@@ -22,8 +22,10 @@ Unit tests for `system76driver.actions` module.
 """
 
 from unittest import TestCase
+from unittest.mock import patch
 import os
 from os import path
+import shutil
 import stat
 from base64 import b32decode, b32encode
 from random import SystemRandom
@@ -31,6 +33,7 @@ from random import SystemRandom
 from .helpers import TempDir
 from system76driver.mockable import SubProcess
 from system76driver import actions
+from system76driver import capabilities
 
 
 random = SystemRandom()
@@ -330,6 +333,14 @@ class TestFileAction(TestCase):
 
 
 class TestGrubAction(TestCase):
+    def setUp(self):
+        # These tests exercise the grub-file-editing code paths and were
+        # written assuming grub is the available backend; boot_backend()
+        # itself is covered separately in TestGrubActionBootBackend.
+        patcher = patch('system76driver.actions.boot_backend', return_value='grub')
+        self.addCleanup(patcher.stop)
+        patcher.start()
+
     def test_init(self):
         inst = actions.GrubAction()
         self.assertIs(inst.update_grub, True)
@@ -599,6 +610,124 @@ class TestGrubAction(TestCase):
             )
 
             self.assertEqual(SubProcess.calls, [])
+
+
+class TestBootBackend(TestCase):
+    def test_kernelstub_preferred_when_present(self):
+        with patch('system76driver.capabilities.shutil.which',
+                   side_effect=lambda name, path=None: '/usr/bin/kernelstub' if name == 'kernelstub' else None):
+            self.assertEqual(capabilities.boot_backend(), 'kernelstub')
+
+    def test_grub_when_kernelstub_absent(self):
+        with patch('system76driver.capabilities.shutil.which',
+                   side_effect=lambda name, path=None: '/usr/sbin/update-grub' if name == 'update-grub' else None):
+            self.assertEqual(capabilities.boot_backend(), 'grub')
+
+    def test_unsupported_when_neither_present(self):
+        with patch('system76driver.capabilities.shutil.which', return_value=None):
+            self.assertIsNone(capabilities.boot_backend())
+
+    def test_finds_update_grub_even_when_callers_path_lacks_usr_sbin(self):
+        # GTK's PATH may not include /usr/sbin even though the system (and
+        # the root CLI) has update-grub there; boot_backend() must still
+        # resolve it instead of silently disagreeing with the CLI.
+        real_which = shutil.which
+
+        def restricted_which(name, path=None):
+            # Simulate a caller PATH that only has /usr/bin, while
+            # update-grub actually lives in /usr/sbin.
+            if path and '/usr/sbin' in path.split(os.pathsep) and name == 'update-grub':
+                return '/usr/sbin/update-grub'
+            return None
+
+        with patch('system76driver.capabilities.shutil.which', side_effect=restricted_which):
+            self.assertEqual(capabilities.boot_backend(), 'grub')
+        # sanity: real shutil.which is unaffected by the patch teardown
+        self.assertIs(shutil.which, real_which)
+
+    def test_finds_ethtool_even_when_callers_path_lacks_usr_sbin(self):
+        def restricted_which(name, path=None):
+            if path and '/usr/sbin' in path.split(os.pathsep) and name == 'ethtool':
+                return '/usr/sbin/ethtool'
+            return None
+
+        with patch('system76driver.capabilities.shutil.which', side_effect=restricted_which):
+            self.assertTrue(capabilities.has_command('ethtool'))
+
+
+class TestGrubActionBootBackend(TestCase):
+    def test_kernelstub_environment(self):
+        with patch('system76driver.actions.boot_backend', return_value='kernelstub'):
+            inst = actions.GrubAction(etcdir='/etc')
+        self.assertEqual(inst.mode, 'kernelstub')
+        self.assertEqual(inst.filename, '/etc/kernelstub/configuration')
+
+    def test_grub_environment(self):
+        with patch('system76driver.actions.boot_backend', return_value='grub'):
+            inst = actions.GrubAction(etcdir='/etc')
+        self.assertEqual(inst.mode, 'grub')
+        self.assertEqual(inst.filename, '/etc/default/grub')
+
+    def test_neither_supported(self):
+        with patch('system76driver.actions.boot_backend', return_value=None):
+            inst = actions.GrubAction(etcdir='/etc')
+        self.assertEqual(inst.mode, 'unsupported')
+        self.assertIsNone(inst.filename)
+        with self.assertRaises(RuntimeError):
+            inst.get_isneeded()
+
+
+class Test_energystar_gsettings_override(TestCase):
+    def test_get_isneeded_requires_glib_compile_schemas(self):
+        tmp = TempDir()
+        inst = actions.energystar_gsettings_override(rootdir=tmp.dir)
+
+        # Familiar-looking distro, but the actual capability is missing:
+        with patch('shutil.which', return_value=None):
+            self.assertIs(inst.get_isneeded(), False)
+
+        # Unfamiliar distro name is irrelevant; the capability is present:
+        with patch('shutil.which', return_value='/usr/bin/glib-compile-schemas'):
+            self.assertIs(inst.get_isneeded(), True)
+
+
+class Test_energystar_wakeonlan(TestCase):
+    def test_get_isneeded_requires_ethtool(self):
+        tmp = TempDir()
+        inst = actions.energystar_wakeonlan(rootdir=tmp.dir)
+
+        with patch('shutil.which', return_value=None):
+            self.assertIs(inst.get_isneeded(), False)
+
+        with patch('shutil.which', return_value='/usr/sbin/ethtool'):
+            self.assertIs(inst.get_isneeded(), True)
+
+
+class Test_touchpad_use_areas(TestCase):
+    def test_get_isneeded_requires_glib_compile_schemas(self):
+        # Found via a repo-wide search for other glib-compile-schemas
+        # callers while adding has_command(): this one had no gate at
+        # all (not even a distro check), so perform() would previously
+        # crash on a system without gsettings/GNOME.
+        tmp = TempDir()
+        inst = actions.touchpad_use_areas(rootdir=tmp.dir)
+
+        with patch('shutil.which', return_value=None):
+            self.assertIs(inst.get_isneeded(), False)
+
+        with patch('shutil.which', return_value='/usr/bin/glib-compile-schemas'):
+            self.assertIs(inst.get_isneeded(), True)
+
+
+class Test_hidpi_scaling(TestCase):
+    def test_get_isneeded_requires_glib_compile_schemas(self):
+        # Same latent gap as touchpad_use_areas: perform() calls
+        # glib-compile-schemas unconditionally, but get_isneeded() never
+        # checked it was there before deciding hidpi scaling is needed.
+        tmp = TempDir()
+        inst = actions.hidpi_scaling(rootdir=tmp.dir)
+        with patch('shutil.which', return_value=None):
+            self.assertIs(inst.get_isneeded(), False)
 
 
 class Test_wifi_pm_disable(TestCase):
