@@ -11,8 +11,32 @@ from __future__ import annotations
 import os
 from pathlib import Path
 import runpy
+import subprocess
 import sys
 
+
+def ensure_root():
+    if os.geteuid() == 0:
+        return
+
+    executable = os.path.abspath(sys.executable)
+
+    env = os.environ.copy()
+
+    command = [
+        "pkexec",
+        "env",
+        f"DISPLAY={env.get('DISPLAY', '')}",
+        f"XAUTHORITY={env.get('XAUTHORITY', '')}",
+        executable,
+        *sys.argv[1:],
+    ]
+
+    subprocess.run(command, check=True)
+    sys.exit(0)
+
+
+ensure_root()
 
 ROOT = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent))
 
